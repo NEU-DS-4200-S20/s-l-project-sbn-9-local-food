@@ -5,12 +5,12 @@ Visualization
 1. Line Chart - Difference in Total Volume of Production (Capable - Actual)
 
 	Data Needed:
-	- Pallets produced 
+	- Pallets produced
 		- Fall
 		- Winter
 		- Spring
 		- Summer
-			- For each vendor 
+			- For each vendor
 
 	Data Manipulations:
 	- Average pallets produced by each vendor for
@@ -31,12 +31,12 @@ Visualization
 
 	Data Needed:
 	- Trade Relationship with buyer
-	- Percentage change in desired wholesaling 
+	- Percentage change in desired wholesaling
 
 	Data Manipulation:
 	- Average of percentage change in desired wholeslaing for each vendor
 		- Categorize based on trade relationship
-	- Subtract desired minus actual 
+	- Subtract desired minus actual
 
 	File Modification:
 	- Last two columns (current percentage, desired percentage)
@@ -50,7 +50,7 @@ Visualization
 	- Food: 'Please list the specialty crop(s) that you produce or are contained in your product(s).'
 
 	Data Manipulation:
-	- Append all food categories of vendors 
+	- Append all food categories of vendors
 	- Have a unique point for each zipcode (more specifically lat and long)
 
 	File Modification
@@ -60,7 +60,7 @@ Visualization
 	- lowercase everything
 	- Remove obviously unimportant words that aren't food
 	- Add two columns with longitude and latitude for each zip code
-		- (1921) Achieve this by creating slightly different longitudes and latitudes 
+		- (1921) Achieve this by creating slightly different longitudes and latitudes
 
 
 
@@ -72,16 +72,10 @@ TASK 1 - DATA CLEANING (DUE 4/1)
 	- Bar Chart
 
 	Alex and Sidney
-	- Maps (1-18, 19-36)
+	- Maps (1-18 alex)
 
 TASK 2 - CODE
 	- Meet friday, saturday
 
 TASK 3 - WRITEUPS
 	- Finish on Sunday
-	
-
-
-
-
-		
