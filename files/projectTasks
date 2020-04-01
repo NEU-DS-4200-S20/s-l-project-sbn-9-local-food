@@ -18,12 +18,12 @@ Visualization
 		- Winter
 		- Spring
 		- Summer
-	- Capable - actual
+	- Capable 
 
 	File Modification:
 	- Rewrite pallet columns for each season - take average (one number)
 		- Categorize based on trade relationship
-	- Rewrite trade relationship as 0 or 1, delete vendors that say 'not applicable'
+	- lowercase yes or no (trade relationship status)
 
 
 
