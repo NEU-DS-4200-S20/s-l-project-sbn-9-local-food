@@ -24,45 +24,44 @@
       .yLabelOffset(100)
       .selectionDispatcher(d3.dispatch(dispatchString))
       ("#barchart", data);
-  };
+  });
 
   d3.csv("data/linechart_data.csv", (data) => {
     const dispatchString = "selectionUpdated";
     let linechart = linechart()
-      .x(d => d[""])
-      .xLabel("")
-      .y(d => d[""])
-      .yLabel("")
+      .x(["Spring","Summer","Fall","Winter"])
+      .xLabel("Season")
+      .y(d => d["Spring Capable Volume","Summer Capable Volume","Fall Capable Volume","Winter Capable Volume"])
+      .yLabel("Pallets Produced")
       .yLabelOffset(40)
       .selectionDispatcher(d3.dispatch(dispatchString))
       ("#linechart", data);
+      // need to make a function that aggregates based on boolean
+      // more research
 
-      Spring Capable Volume,Summer Capable Volume,Fall Capable Volume,Winter Capable Volume
 
     // When the line chart selection is updated via brushing, 
     // tell the scatterplot to update it's selection (linking)
-    lcYearPoverty.selectionDispatcher().on(dispatchString, function(selectedData) {
-      spUnemployMurder.updateSelection(selectedData);
+    barchart.selectionDispatcher().on(dispatchString, function(selectedData) {
+      linechart.updateSelection(selectedData);
       // ADD CODE TO HAVE TABLE UPDATE ITS SELECTION AS WELL
-      tableData.updateSelection(selectedData);
+      spatialPlot.updateSelection(selectedData);
     });
 
     // When the scatterplot selection is updated via brushing, 
     // tell the line chart to update it's selection (linking)
-    spUnemployMurder.selectionDispatcher().on(dispatchString, function(selectedData) {
-      lcYearPoverty.updateSelection(selectedData);
+    linechart.selectionDispatcher().on(dispatchString, function(selectedData) {
+      barchart.updateSelection(selectedData);
       // ADD CODE TO HAVE TABLE UPDATE ITS SELECTION AS WELL
-      tableData.updateSelection(selectedData);
+      spatialPlot.updateSelection(selectedData);
     });
 
     // When the table is updated via brushing, tell the line chart and scatterplot
     // YOUR CODE HERE
-    tableData.selectionDispatcher().on(dispatchString, function(selectedData) {
-      lcYearPoverty.updateSelection(selectedData);
-      spUnemployMurder.updateSelection(selectedData);
+    spatialPlot.selectionDispatcher().on(dispatchString, function(selectedData) {
+      linechart.updateSelection(selectedData);
+      barchart.updateSelection(selectedData);
     });
   });
-
-})());
 
 })());
