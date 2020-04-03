@@ -23,25 +23,12 @@ function linechart() {
     selectableElements = d3.select(null),
     dispatcher;
 
-/*
 
   // Create the chart by adding an svg to the div with the id 
   // specified by the selector using the given data
+
   function chart(selector, data) {
 
-    console.log(d3.map(data, xValue).keys());
-
-    xScale
-      .domain(d3.map())
-
-      return chart;
-
-  }*/
-
-
-  // Create the chart by adding an svg to the div with the id 
-  // specified by the selector using the given data
-  function chart(selector, data) {
     let svg = d3.select(selector)
       .append("svg")
         .attr("preserveAspectRatio", "xMidYMid meet")
@@ -50,20 +37,27 @@ function linechart() {
 
 
 
-    svg = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      svg = svg.append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    //Define scales
-    xScale
-      .domain(d3.map(data, xValue).keys())
-      .rangeRound([0, width]);
+      //Define scales
+      xScale
+        .domain(d3.map(data[0], xValue).keys())
+        .rangeRound([0, width]);
 
-    yScale
-      .domain([
-        d3.min(data, d => yValue(d)),
-        d3.max(data, d => yValue(d))
-      ])
+      // compute max pallets produced
+      let maxY = 0;
+      data.forEach(function(d) {
+        d.forEach(function(i) {
+            if(i.pallets > maxY) { maxY = i.pallets}
+        })      
+      });
+
+
+     yScale
+      .domain([0, maxY])
       .rangeRound([height, 0]);
+
 
     // X axis
     let xAxis = svg.append("g")
