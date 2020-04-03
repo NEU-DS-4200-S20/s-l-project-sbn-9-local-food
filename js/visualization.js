@@ -4,11 +4,13 @@
   // Load the data from a CSV file
   d3.csv("data/map_data.csv", (data) => {
 
+//we switched the x and y coordinates when inputting the longitude/latitude
+// proper: (-70.609,41.451,-72.963,43.617)
     // Create a spatial plot given a background image,
     // x and y attributes, 
     // a div id selector to put our svg in; and the data to use.
     let spatialPlot = spatial({
-        'backgroundImage': 'x.png' //add image soon
+        'backgroundImage': 'local_map.png' //add image soon
       })
       .x(d => +d.Longitude)
       .y(d => +d.Latitude)
