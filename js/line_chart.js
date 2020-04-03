@@ -42,7 +42,7 @@ function linechart() {
 
       //Define scales
       xScale
-        .domain(d3.map(data[0], xValue).keys())
+        .domain(['Spring', 'Summer', 'Fall', 'Winter'])
         .rangeRound([0, width]);
 
       // compute max pallets produced
@@ -55,7 +55,7 @@ function linechart() {
 
 
      yScale
-      .domain([0, maxY])
+      .domain([0, maxY + 1])
       .rangeRound([height, 0]);
 
 
@@ -94,6 +94,30 @@ function linechart() {
           .x(X)
           .y(Y)
         );
+
+        const line_relation = d3.line()
+          .x(function(d) { return xScale(d.season)})
+          .y(function(d) {return yScale(d.pallets); });
+
+        const line_norelation = d3.line()
+        .x(function(d) { return xScale(d.season)})
+        .y(function(d) {return yScale(d.pallets); });
+
+      const lines = svg.selectAll("lines")
+        .data(data)
+        .enter()
+        .append("g");
+        
+        lines.append("path")
+        .attr("d", function(d) { 
+          return line_relation(d.values); 
+
+        lines.append("path")
+          .attr("d", function(d) { 
+          return line_norelation(d.values); 
+        });
+
+    
 
     // Add the points
     let points = svg.append("g")

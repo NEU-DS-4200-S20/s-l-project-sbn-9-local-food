@@ -69,7 +69,7 @@ let line_norelation = [];
 		//linechart_data["norelation"] = parseLineChartData(data_norelation)
 
 		linechart_data.forEach(function(d) {
-			//console.log(d)
+			console.log(d)
 		})	
 		
 
