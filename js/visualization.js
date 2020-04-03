@@ -48,7 +48,6 @@ let line_norelation = [];
 				d["Percent Change in Desired Wholesaling"] = +d["Percent Change in Desired Wholesaling"];
 			}
 
-
 		});
 
 		// split data based on whether vendor has trade relation or not
@@ -62,18 +61,31 @@ let line_norelation = [];
 
 	
 		// Add the data set of for vendors with and without relation
-		linechart_data["relation"] = parseLineChartData(data_relation);
-		linechart_data["norelation"] = parseLineChartData(data_norelation);		
+
+		linechart_data.push(parseLineChartData(data_relation)); 
+		linechart_data.push(parseLineChartData(data_norelation));
+
+		linechart_data.forEach(function(d) {
+			//console.log(d)
+		})	
 		
 
-
 		let lcSeasonProduction = linechart()
+			.x(d => d.season)
+			.xLabel("Season")
+			.y(d => d.pallets)
+			.yLabel("Average Pallets Produced")
+			.yLabelOffset(40)
+			.selectionDispatcher(d3.dispatch(dispatchString))
+			("#linechart", linechart_data);
 
 
 		// parseBarChartData(data);
 		// parseMapData(data);
 
+			
 
+			
 
 	});
 

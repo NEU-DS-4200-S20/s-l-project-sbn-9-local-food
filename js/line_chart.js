@@ -4,8 +4,6 @@
 // Reusable Chart framework https://bost.ocks.org/mike/chart/
 function linechart() {
 
-  // Based on Mike Bostock's margin convention
-  // https://bl.ocks.org/mbostock/3019563
   let margin = {
       top: 60,
       left: 50,
@@ -25,6 +23,22 @@ function linechart() {
     selectableElements = d3.select(null),
     dispatcher;
 
+/*
+
+  // Create the chart by adding an svg to the div with the id 
+  // specified by the selector using the given data
+  function chart(selector, data) {
+
+    console.log(d3.map(data, xValue).keys());
+
+    xScale
+      .domain(d3.map())
+
+      return chart;
+
+  }*/
+
+
   // Create the chart by adding an svg to the div with the id 
   // specified by the selector using the given data
   function chart(selector, data) {
@@ -33,6 +47,8 @@ function linechart() {
         .attr("preserveAspectRatio", "xMidYMid meet")
         .attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom].join(' '))
         .classed("svg-content", true);
+
+
 
     svg = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
