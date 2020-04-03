@@ -85,51 +85,57 @@ function linechart() {
         .attr("transform", "translate(" + yLabelOffsetPx + ", -12)")
         .text(yLabelText);
 
-    // Add the line
-    svg.append("path")
-        .datum(data)
-        .attr("class", "linePath")
-        .attr("d", d3.line()
-          // Just add that to have a curve instead of segments
-          .x(X)
-          .y(Y)
-        );
+  
 
-        const line_relation = d3.line()
-          .x(function(d) { return xScale(d.season)})
-          .y(function(d) {return yScale(d.pallets); });
-
-        const line_norelation = d3.line()
+      const line_relation = d3.line()
         .x(function(d) { return xScale(d.season)})
         .y(function(d) {return yScale(d.pallets); });
 
-      const lines = svg.selectAll("lines")
-        .data(data)
-        .enter()
-        .append("g");
-        
-        lines.append("path")
-        .attr("d", function(d) { 
-          return line_relation(d.values); 
+      const line_norelation = d3.line()
+      .x(function(d) { return xScale(d.season)})
+      .y(function(d) {return yScale(d.pallets); });
 
-        lines.append("path")
-          .attr("d", function(d) { 
-          return line_norelation(d.values); 
-        });
+    const lines = svg.selectAll("lines")
+      .data(data)
+      .enter()
+      .append("g");
+      
+      lines.append("path")
+      .attr("d", function(d) { 
+        return line_relation(d.values)}); 
+
+      lines.append("path")
+        .attr("d", function(d) { 
+        return line_norelation(d.values); 
+      });
 
     
 
     // Add the points
-    let points = svg.append("g")
+   /* let points_relation = svg.append("g")
       .selectAll(".linePoint")
-        .data(data);
+        .data(data[0]);
+
+    let points_norelation = svg.append("g")
+      .selectAll(".linePoint")
+        .data(data[1]);
     
-    points.exit().remove();
+    points_relation.exit().remove();
           
-    points = points.enter()
+    points_relation = points_relation.enter()
       .append("circle")
         .attr("class", "point linePoint")
-      .merge(points)
+      .merge(points_relation)
+        .attr("cx", X)
+        .attr("cy", Y)        
+        .attr("r",5);
+
+    points_relation.exit().remove();
+          
+    points_relation = points_relation.enter()
+      .append("circle")
+        .attr("class", "point linePoint")
+      .merge(points_relation)
         .attr("cx", X)
         .attr("cy", Y)        
         .attr("r",5);
@@ -177,7 +183,7 @@ function linechart() {
           d3.select(this).call(brush.move, null);
         }
       }
-    }
+    }*/
 
     return chart;
   }
@@ -260,3 +266,4 @@ function linechart() {
 
   return chart;
 }
+
