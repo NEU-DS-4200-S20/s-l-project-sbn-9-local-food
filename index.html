@@ -50,10 +50,23 @@
   <div class="vis-holder">
     <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
+    <div class="legend-holder" id="legend">
+
+      <div class='my-legend'>
+      <div class='legend-title'>Legend</div>
+      <div class='legend-scale'>
+        <ul class='legend-labels'>
+          <li><span style='background:#0000ff;'></span>Has Trade Relation</li>
+          <li><span style='background:#008000;'></span>No Trade Relation</li>
+        </ul>
+      </div>
+      </div>
+
+    </div>
     <div class="linechart-holder" id="linechart"></div>
-    <div class="scatterplot-holder" id="scatterplot"></div>
-    <div class="table-holder" id="table"></div>
-    <div class="legend-holder" id="legend"></div>
+    <div class="barchart-holder" id="barchart"></div>
+    <div class="map-holder" id="map"></div>
+    
 
   </div>
 

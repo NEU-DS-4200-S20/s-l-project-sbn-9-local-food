@@ -11,7 +11,7 @@ function linechart() {
       bottom: 35
     },
     width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom,
+    height = 550 - margin.top - margin.bottom,
     xValue = d => d[0],
     yValue = d => d[1],
     xLabelText = "Season",
@@ -31,12 +31,17 @@ function linechart() {
     let svg = d3.select(selector)
       .append("svg")
         .attr("preserveAspectRatio", "xMidYMid meet")
-        .attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom].join(' '))
+        .attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom + 10].join(' '))
         .classed("svg-content", true);
 
 
     svg = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0)
+      .style("position", "absolute");
 
 
     //Define scales
@@ -67,7 +72,7 @@ function linechart() {
     // X axis label
     xAxis.append("text")
         .attr("class", "axis")
-        .attr("transform", "translate(" + (width / 2) + ",30)")
+        .attr("transform", "translate(" + (width / 2) + ",40)")
         .attr("class", "axis_label")
         .text(xLabelText);
 
@@ -76,7 +81,7 @@ function linechart() {
         .attr("class", "axis")
         .call(d3.axisLeft(yScale))
         .append("text")
-        .attr("transform", "rotate(-90) translate(-150, -28)")
+        .attr("transform", "rotate(-90) translate(-130, -28)")
         //.attr("transform", "translate(" + yLabelOffsetPx + ", -12)")
         .style("text-anchor", "end")
         .attr("class", "axis_label")
@@ -104,12 +109,44 @@ function linechart() {
 
     let line_class = ""
     svg.selectAll("path")
-    .on('mousedown', function() {
+    .on('mouseover', function() {
       line_class = this.getAttribute("class")
       const selection = d3.select(this).attr("class", "highlight_" + line_class.slice(-1))
     })
-    .on('mouseup', function() {
+    .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
+    });
+
+    lines.selectAll("points")
+    .data(function(d) {return d.values})
+    .enter()
+    .append("circle")
+    .attr("cx", function(d) { return xScale(d.season); })       
+    .attr("cy", function(d) { return yScale(d.pallets); })     
+    .attr("r", 0)
+    .attr("class","point")
+
+    lines.selectAll("circles")
+    .data(function(d) { return(d.values); } )
+    .enter()
+    .append("circle")
+    .attr("cx", function(d) { return xScale(d.season); })       
+    .attr("cy", function(d) { return yScale(d.pallets); })     
+    .attr('r', 10)
+    .style("opacity", 0)
+    .on('mouseover', function(d) {
+        tooltip.transition()
+    .duration(200)
+    .delay(30)
+    .style("opacity", 1);
+    
+        tooltip.html(d.pallets.toFixed(1))
+    .style("left", (d3.event.pageX + 25) + "px")
+    .style("top", (d3.event.pageY) + "px")})
+    .on("mouseout", function(d) {       
+    tooltip.transition()        
+    .duration(200)      
+    .style("opacity", 0);  
     });
 
 

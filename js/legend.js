@@ -1,4 +1,4 @@
-function legend() {
+function legend() {/*
 
 let margin = {
     top: 12,
@@ -43,5 +43,5 @@ var legend = svg 
        .attr("y", 9) 
        .attr("dy", ".35em") 
        .text(function(d) { return d.label }); 
-return legend
+return legend*/
 }
