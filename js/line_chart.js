@@ -24,7 +24,7 @@ function linechart() {
     dispatcher;
 
 
-  // Create the chart by adding an svg to the div with the id 
+  // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
 
   function chart(selector, data) {
@@ -46,8 +46,8 @@ function linechart() {
       .rangeRound([0, width]);
 
     yScale.domain([(0), d3.max(data, function(c) {
-    return d3.max(c.values, function(d) { 
-        return d.pallets + 1; }); 
+    return d3.max(c.values, function(d) {
+        return d.pallets + 1; });
         })
     ])
     .rangeRound([height, 0]);
@@ -58,19 +58,19 @@ function linechart() {
         .attr("class", "axis")
         .attr("transform", "translate(0," + (height) + ")")
         .call(d3.axisBottom(xScale));
-        
-    // Put X axis tick labels 
-    xAxis.selectAll("text") 
+
+    // Put X axis tick labels
+    xAxis.selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "1.25em")
         .attr("dy", "1em");
-        
+
     // X axis label
-    xAxis.append("text")        
+    xAxis.append("text")
         .attr("class", "axis")
         .attr("transform", "translate(" + (width - 50) + ",-10)")
         .text(xLabelText);
-    
+
     // Y axis and label
     let yAxis = svg.append("g")
         .attr("class", "axis")
@@ -87,7 +87,7 @@ function linechart() {
 
     let id = 0;
     const ids = function () {
-      return "line-"+id++; 
+      return "line-"+id++;
     }
 
 
@@ -95,23 +95,35 @@ function linechart() {
       .data(data)
       .enter()
       .append("g");
-      
+
       lines.append("path")
       .attr("class", ids)
-      .attr("d", function(d) { 
-        return line(d.values)}); 
+      .attr("d", function(d) {
+        return line(d.values)});
 
       lines.append("text")
       .attr("class","serie_label")
-      .datum(function(d) { 
+      .datum(function(d) {
           return {
-              id: d.id, 
+              id: d.id,
               value: d.values[d.values.length - 1]}; })
-      .attr("transform", function(d) { 
-              return "translate(" + (xScale(d.value.season) - 65)  
+      .attr("transform", function(d) {
+              return "translate(" + (xScale(d.value.season) - 65)
               + "," + (yScale(d.value.pallets) + 15 ) + ")"; })
       .attr("x", 5)
       .text(function(d) { return d.id; });
+
+
+
+
+    svg.selectAll("path")
+    .on('mousedown', function() {
+      const selection = d3.select(this).attr("class", "highlight")
+    })
+    .on('mouseup', function() {
+    const selection = d3.select(this).attr("class", "path" + ids)
+    });
+
 
     return chart;
   }
@@ -181,7 +193,7 @@ function linechart() {
     return chart;
   };
 
-  // Given selected data from another visualization 
+  // Given selected data from another visualization
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
@@ -194,4 +206,3 @@ function linechart() {
 
   return chart;
 }
-

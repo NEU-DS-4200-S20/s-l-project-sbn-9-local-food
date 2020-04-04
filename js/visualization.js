@@ -7,7 +7,7 @@ let map_data = [];
 let barchart_data = [];
 let bar_relation = [];
 let bar_norelation = [];
-let linechart_data = []; 
+let linechart_data = [];
 let line_relation = [];
 let line_norelation = [];
 
@@ -21,11 +21,11 @@ let line_norelation = [];
 
 
 		// convert strings to numbers unless "Not Applicable"
-		// add 0 to each zipcode 
+		// add 0 to each zipcode
 		data.forEach(function(d) {
 			d["Mailing Address (Zip Code)"] = "0" + d["Mailing Address (Zip Code)"] ;
-			d["Latitude"] = +d["Latitude"]; 
-			d["Longitude"] = +d["Longitude"]; 
+			d["Latitude"] = +d["Latitude"];
+			d["Longitude"] = +d["Longitude"];
 
 
 			if(d["Spring Capable Volume"] !== "Not Applicable") {
@@ -72,7 +72,7 @@ let line_norelation = [];
 				values: linechart_unformatted[i]
 			});
 		});
-	
+
 
 		let lcSeasonProduction = linechart()
 			.x(d => d.season)
@@ -107,9 +107,9 @@ function parseLineChartData(data) {
 	let fallVendorCount = 0;
 	let fallAverage;
 
-	let winterTotal = 0; 
-	let winterVendorCount = 0; 
-	let winterAverage; 
+	let winterTotal = 0;
+	let winterVendorCount = 0;
+	let winterAverage;
 
 	data.forEach(function(row, i, arr) {
 		let springValue = row["Spring Capable Volume"];
@@ -119,7 +119,7 @@ function parseLineChartData(data) {
 
 		if(springValue !== "Not Applicable") {
 			springTotal += springValue;
-			springVendorCount++; 
+			springVendorCount++;
 		}
 		if(summerValue !== "Not Applicable") {
 			summerTotal += summerValue;
@@ -138,7 +138,7 @@ function parseLineChartData(data) {
 	springAverage = springTotal / springVendorCount;
 	summerAverage = summerTotal / summerVendorCount;
 	fallAverage = fallTotal / fallVendorCount;
-	winterAverage = winterTotal / winterVendorCount; 
+	winterAverage = winterTotal / winterVendorCount;
 
 	let seasons = ["Spring", "Summer", "Fall", "Winter"];
 	averages = [springAverage, summerAverage, fallAverage, winterAverage];
@@ -151,5 +151,5 @@ function parseLineChartData(data) {
 	});
 
 
-	return tempArr; 
+	return tempArr;
 }
