@@ -77,3 +77,56 @@ h1, h2, h3 {
 		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
 	}
 }
+
+.vis-holder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.linechart-holder {
+  flex: 0 0 50%;
+}
+
+.axis line{
+stroke: #706f6f;
+stroke-width: 0.5;
+shape-rendering: crispEdges;
+}
+
+/* axis contour */
+.axis path {
+stroke: #706f6f;
+stroke-width: 0.7;
+shape-rendering: crispEdges;
+}
+
+/* axis text */
+.axis text {
+fill: #2b2929;
+font-family: Georgia;
+font-size: 120%;
+}
+
+path {
+	fill: none;
+	stroke: #ed3700;
+}
+
+path.line-0 {
+fill: none;
+stroke: #ed3700;
+}
+
+path.line-1 {
+fill: none;
+stroke: #2b2929;
+stroke-dasharray: 2;
+}
+
+.serie_label {
+fill: #2b2929;
+font-family: Georgia;
+font-size: 60%;
+padding: 5px 20px 5px 5px;
+}

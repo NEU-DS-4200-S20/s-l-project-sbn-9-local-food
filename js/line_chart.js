@@ -14,8 +14,8 @@ function linechart() {
     height = 500 - margin.top - margin.bottom,
     xValue = d => d[0],
     yValue = d => d[1],
-    xLabelText = "",
-    yLabelText = "",
+    xLabelText = "Season",
+    yLabelText = "Average Pallets Produced",
     yLabelOffsetPx = 0,
     xScale = d3.scalePoint(),
     yScale = d3.scaleLinear(),
@@ -36,64 +36,60 @@ function linechart() {
         .classed("svg-content", true);
 
 
-
-      svg = svg.append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      //Define scales
-      xScale
-        .domain(['Spring', 'Summer', 'Fall', 'Winter'])
-        .rangeRound([0, width]);
-
-      // compute max pallets produced
-      let maxY = 0;
-      data.forEach(function(d) {
-        d.forEach(function(i) {
-            if(i.pallets > maxY) { maxY = i.pallets}
-        })      
-      });
+    svg = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-     yScale
-      .domain([0, maxY + 1])
-      .rangeRound([height, 0]);
+    //Define scales
+    xScale
+      .domain(['Spring', 'Summer', 'Fall', 'Winter'])
+      .rangeRound([0, width]);
+
+    yScale.domain([(0), d3.max(data, function(c) {
+    return d3.max(c.values, function(d) { 
+        return d.pallets + 1; }); 
+        })
+    ])
+    .rangeRound([height, 0]);
 
 
     // X axis
     let xAxis = svg.append("g")
+        .attr("class", "axis")
         .attr("transform", "translate(0," + (height) + ")")
         .call(d3.axisBottom(xScale));
         
-    // Put X axis tick labels at an angle
+    // Put X axis tick labels 
     xAxis.selectAll("text") 
         .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)");
+        .attr("dx", "1.25em")
+        .attr("dy", "1em");
         
     // X axis label
     xAxis.append("text")        
-        .attr("class", "axisLabel")
+        .attr("class", "axis")
         .attr("transform", "translate(" + (width - 50) + ",-10)")
         .text(xLabelText);
     
     // Y axis and label
     let yAxis = svg.append("g")
+        .attr("class", "axis")
         .call(d3.axisLeft(yScale))
-      .append("text")
-        .attr("class", "axisLabel")
-        .attr("transform", "translate(" + yLabelOffsetPx + ", -12)")
+        .append("text")
+        .attr("transform", "rotate(-90) translate(-150, -28)")
+        //.attr("transform", "translate(" + yLabelOffsetPx + ", -12)")
+        .style("text-anchor", "end")
         .text(yLabelText);
 
-  
-
-      const line_relation = d3.line()
-        .x(function(d) { return xScale(d.season)})
-        .y(function(d) {return yScale(d.pallets); });
-
-      const line_norelation = d3.line()
-      .x(function(d) { return xScale(d.season)})
+    const line = d3.line()
+      .x(function(d) { return xScale(d.season);})
       .y(function(d) {return yScale(d.pallets); });
+
+    let id = 0;
+    const ids = function () {
+      return "line-"+id++; 
+    }
+
 
     const lines = svg.selectAll("lines")
       .data(data)
@@ -101,89 +97,21 @@ function linechart() {
       .append("g");
       
       lines.append("path")
+      .attr("class", ids)
       .attr("d", function(d) { 
-        return line_relation(d.values)}); 
+        return line(d.values)}); 
 
-      lines.append("path")
-        .attr("d", function(d) { 
-        return line_norelation(d.values); 
-      });
-
-    
-
-    // Add the points
-   /* let points_relation = svg.append("g")
-      .selectAll(".linePoint")
-        .data(data[0]);
-
-    let points_norelation = svg.append("g")
-      .selectAll(".linePoint")
-        .data(data[1]);
-    
-    points_relation.exit().remove();
-          
-    points_relation = points_relation.enter()
-      .append("circle")
-        .attr("class", "point linePoint")
-      .merge(points_relation)
-        .attr("cx", X)
-        .attr("cy", Y)        
-        .attr("r",5);
-
-    points_relation.exit().remove();
-          
-    points_relation = points_relation.enter()
-      .append("circle")
-        .attr("class", "point linePoint")
-      .merge(points_relation)
-        .attr("cx", X)
-        .attr("cy", Y)        
-        .attr("r",5);
-        
-    selectableElements = points;
-
-    svg.call(brush);
-
-    // Highlight points when brushed
-    function brush(g) {
-      const brush = d3.brush()
-        .on("start brush", highlight)
-        .on("end", brushEnd)
-        .extent([
-          [-margin.left, -margin.bottom],
-          [width + margin.right, height + margin.top]
-        ]);
-
-      ourBrush = brush;
-
-      g.call(brush); // Adds the brush to this element
-
-      // Highlight the selected circles.
-      function highlight() {
-        console.log("highlight fn called")
-        if (d3.event.selection === null) return;
-        const [
-          [x0, y0],
-          [x1, y1]
-        ] = d3.event.selection;
-        points.classed("selected", d =>
-          x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
-        );
-
-        // Get the name of our dispatcher's event
-        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-
-        // Let other charts know
-        dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
-      }
-      
-      function brushEnd() {
-        // We don't want an infinite recursion
-        if (d3.event.sourceEvent.type != "end") {
-          d3.select(this).call(brush.move, null);
-        }
-      }
-    }*/
+      lines.append("text")
+      .attr("class","serie_label")
+      .datum(function(d) { 
+          return {
+              id: d.id, 
+              value: d.values[d.values.length - 1]}; })
+      .attr("transform", function(d) { 
+              return "translate(" + (xScale(d.value.season) - 65)  
+              + "," + (yScale(d.value.pallets) + 15 ) + ")"; })
+      .attr("x", 5)
+      .text(function(d) { return d.id; });
 
     return chart;
   }
