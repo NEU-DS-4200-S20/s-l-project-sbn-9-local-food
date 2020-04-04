@@ -4,13 +4,13 @@
 <!-- Metadata -->
 <head>
   <meta charset="utf-8">
-  
+
   <!-- Title -->
   <title>Project Team 9: SBN Trade Show, DS 4200 S20</title>
-  
+
   <!-- CSS Styling -->
   <link rel="stylesheet" href="style.css">
- 
+
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -26,38 +26,34 @@
 <body>
 
   <!-- Update this with your GitHub repo URL -->
-  <span id="forkongithub"><a href="https://github.com/Northeastern-DS-4200-S20-Staff/S-L-Project-Template">Fork me on GitHub</a></span>
-  
+  <span id="forkongithub"><a href="https://github.com/NEU-DS-4200-S20/s-l-project-sbn-9-local-food">Fork me on GitHub</a></span>
+
   <!-- Your writeup goes here -->
   <div class = "content-column">
-  
-    <h1>Project Team #: Topic, DS 4200 S20</h1>
-    
-    <p><strong>Student One</strong>, <strong>Student Two</strong>, <strong>Student Three</strong></p>
-    
-    <p>Service-Learning Course Project as part of <a href="https://canvas.instructure.com/courses/1781714">DS 4200: Information Presentation and Visualization</a>, taught by <a href="https://www.eecs.tufts.edu/~dcashm01/">Prof. Dylan Cashman</a>, <a href="https://visualization.khoury.northeastern.edu/">Data Visualization @ Khoury</a>, <a href="https://www.khoury.northeastern.edu/">Northeastern University</a>.</p>
-    
-    
-    <h1>Motivation</h1>
-    
-    <p><em>Summary of user needs and motivating questions.</em></p>
-    
-    <p><em>Expectation: There is a clear focus, and a developed explanation of the problem, and a reasonable response is proposed.</em></p>
 
-    
+    <h1>Project Team 9: Topic, DS 4200 S20</h1>
+
+    <p><strong>Sidney La Fontaine</strong>, <strong>Rahul Suryadevara</strong>, <strong>Alexander Shaw</strong>, <strong>Eric Downing</strong></p>
+
+    <p>Service-Learning Course Project as part of <a href="https://canvas.instructure.com/courses/1781714">DS 4200: Information Presentation and Visualization</a>, taught by <a href="https://www.eecs.tufts.edu/~dcashm01/">Prof. Dylan Cashman</a>, <a href="https://visualization.khoury.northeastern.edu/">Data Visualization @ Khoury</a>, <a href="https://www.khoury.northeastern.edu/">Northeastern University</a>.</p>
+
+
+    <h1>Motivation</h1>
+
+    <p><em>Our project is a visualization that aims to promote awareness among buyers and wholesale producers (vendors) about the availability of sustainable and local food. Through our visualization, we aim to foster these relationships by filling in the information gap that exists between buyers looking to purchase local food, and wholesale producers looking for more distribution channels. The needs of the organization include connecting buyers to vendors as larger institutions (buyers) are not well informed about the availability of local food. We are addressing this need by creating a visualization that identifies the location of various vendors that wholesale local food, along with how much they produce and are willing to increase in production (and whether or not they have a trade relationship) so that buyers can connect to them.</em></p>
+
     <h1>Visualization</h1>
-    
-    <p><em>Include the interactive visualization as part of this page. Static example follows.</em></p>
-    
+
   </div>
-  
+
   <!-- Your visualization here -->
   <div class="vis-holder">
-    <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->    
+    <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
     <div class="linechart-holder" id="linechart"></div>
     <div class="scatterplot-holder" id="scatterplot"></div>
     <div class="table-holder" id="table"></div>
+    <div class="legend-holder" id="legend"></div>
 
   </div>
 
@@ -66,9 +62,9 @@
   <div class = "content-column">
 
     <h1>Demo Video</h1>
-    
+
     <p><em>Embedded MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne made of Mike Bostock's flexible transitions in D3 slide:</em></p>
-    
+
     <video controls width="100%">
       <source src="http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4" type="video/mp4">
       <p>Your browser doesn't support HTML5 video. Here is
@@ -76,22 +72,125 @@
     </video>
 
     <h1>Visualization explanation</h1>
-    
+
     <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
 
     <h1>Data Analysis</h1>
-    <p><em>Summary of data, data types, and data preprocessing.</em></p>
 
-    <p><em>Expectation: Data sources match the problem statement and are appropriate. These descriptions should be very explicit so someone could read your page and properly reproduce your results.</em></p>
+    <p>Data collection: in-person surveys collected by the Sustainable Business Network at the Local Trade Show</p>
+
+    <p><em>Data Summary</em></p>
+
+    <p>Below are the columns we are using between the three visualizations. The bolded data types are ones we added or derived (derived attributes list the attributes from the original dataset). The data was collected through in-person surveys collected by the Sustainable Business Network at the Local Trade Show. </p>
+
+    <p>Mailing Address (Zip)</p>
+    <ul>
+      <li>Data Type: string</li>
+      <li>Data Preprocessing: appended 0 to the beginning of each </li>
+      <li>Data Summary:Represents the zipcode for each vendor. Latitude and longitude were added as a means to map out the zipcodes.</li>
+    </ul>
+    <p><b>Latitude and Longitude [one column each coordinate]</b></p>
+    <ul>
+      <li>Data Type: float</li>
+      <li>Data Preprocessing: Data preprocessing: found the coordinates for each zip code; differentiated between vendors with the same zip code but different trade relation status by adding 0.008 to the longitude and latitude so the points do not overlap on the map</li>
+      <li>Data Summary: These are the coordinates of each zip code</li>
+    </ul>
+    <p>Does your company currently have a trade relationship with a buyer?</p>
+    <ul>
+      <li>Data Type: yes/no booleans</li>
+      <li>Data Preprocessing: all strings were set to lowercase, dropped any additional words or symbols that were not ‘yes’ or ‘no’</li>
+      <li>Data Summary: We use this to separate our dataset into the two categories: has trade relation or not.</li>
+    </ul>
+    <p>Please list the specialty crop(s) that you produce or are contained in your product(s).</p>
+    <ul>
+      <li>Data Type: string</li>
+      <li>Data Preprocessing: made lists lower case, replaced commas and spaces with forward slashes</li>
+      <li>Data Summary: Represents list of the crops produced by each vendor, which in turn are identified by their zip code.</li>
+    </ul>
+    <p>Spring, Summer, Fall, Winter Capable Volume [One column each season]</p>
+    <ul>
+      <li>Data Type: float</li>
+      <li>Data Preprocessing: Took the average of the bucket representing quantity (e.g. 4 for the 3-5 bucket). For the 20+ bucket, assumed 21. Computed the average production per season of all vendors. Standardized “N/A” answers to “Not Applicable”, and ignored them in the computation.</li>
+      <li>Data Summary: Represents how many pallets each vendor is capable of producing per season. The food items produced by a zip code consists of the food items produced by each vendor in that zipcode (with the same trade relation status).</li>
+    </ul>
+    <p>Approximately what percentage of your products do you currently sell wholesale?</p>
+    <ul>
+      <li>Data Type: float</li>
+      <li>Data Preprocessing: dropped “%” text, changed string into float</li>
+      <li>Data Summary: Represents the percentage of products that the vendor currently does wholesale</li>
+    </ul>
+    <p>Do you have a goal for what percentage of your products you would like to sell wholesale?</p>
+    <ul>
+      <li>Data Type: float</li>
+      <li>Data Preprocessing: dropped “%” text, changed string into float</li>
+      <li>Data Summary: Represents the percentage of products vendor desires to wholesale</li>
+    </ul>
+    <p><b>Percent Change in Desired Wholesaling</b></p>
+    <ul>
+      <li>Data Type: float</li>
+      <li>Data Preprocessing: Calculated by subtracting the two previous columns: (Do you have a goal for what percentage of your products you would like to wholesale? ) - (Approximately what percentage of your products do you currently wholesale?). Standardized “N/A” answers to “Not Applicable”, and ignored them in the computation.</li>
+      <li>Data Summary: Represents the difference between the goal for what percentage of products the vendor would like to wholesale, and approximately what percentage of products the vendor currently does wholesale.</li>
+    </ul>
+
+
 
     <h1>Task Analysis</h1>
 
-    <p><em>Summary of task table.</em></p>
+    <p><em>Task Table</em></p>
 
-    <p><em>Expectation: Clearly describes domain tasks, processes, goals and abstract tasks for domain problems.</em></p>
+    <table style="width:100%">
+      <tr>
+        <th>Index (ID #)</th>
+        <th>Domain Task</th>
+        <th>Analytic Task</th>
+        <th>Search Task</th>
+        <th>Analyze Task</th>
+        <th>Description of Implementation</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td> Comparing quantity vendors are capable of producing based on trade relationship status</td>
+        <td>Compare</td>
+        <td>Locate</td>
+        <td>Derive</td>
+        <td>Depicted in the line chart through 2 different lines corresponding to the trade relation status.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Comparing ability to meet increased wholesaling demand based on trade relationship status</td>
+        <td>Compare</td>
+        <td>Locate</td>
+        <td>Derive</td>
+        <td>Depicted in the bar chart through 2 bars corresponding to the trade relation status.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Identify trade relationship status of vendors</td>
+        <td>Identify</td>
+        <td>Lookup</td>
+        <td>Present</td>
+        <td>Depicted through the color coding of the legend.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Identify location of the vendors</td>
+        <td>Summarize</td>
+        <td>Explore</td>
+        <td>Discover</td>
+        <td>Depicted through the map which allows users to explore the different locations of farms.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Identify what type of food vendors produce</td>
+        <td>Summarize</td>
+        <td>Explore</td>
+        <td>Discover</td>
+        <td>Depicted through the map which allows users to explore the different produce produced at locations of farms.</td>
+      </tr>
+    </table>
 
     <h1>Design Process</h1>
-    
+
     <p><em>Sketches and design choices to justify final visualization.</em></p>
 
     <p><em>Expectation: Evidence of iterative improvement.
@@ -102,21 +201,23 @@
     <h1>Conclusion</h1>
 
     <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
-    
+
     <p><em>Expectation: Meaningfully wraps up project and has good future directions.</em></p>
 
-    
+
     <h1>Acknowledgments</h1>
 
     <p><em>List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.</em></p>
-    
+
     <ul>
       <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
       <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
+      <li><a href="http://datawanderings.com/2019/11/01/tutorial-making-an-interactive-line-chart-in-d3-js-v-5/">TUTORIAL: Making an Interactive Line Chart in D3.js v.5</a> by Eve the Analyst.</li>
+      <li><a href="http://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/">TUTORIAL: Making a Line Chart in D3.js v.5</a> by Eve the Analyst.</li>
     </ul>
-    
+
   </div>
-  
+
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v4/d3.v4.js"></script>
   <script src="js/visualization.js"></script>

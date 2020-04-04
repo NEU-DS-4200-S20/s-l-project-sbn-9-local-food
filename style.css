@@ -108,6 +108,11 @@ font-family: Georgia;
 font-size: 120%;
 }
 
+.axis_label {
+	font-weight: bold;
+	font-size: 200%;
+}
+
 path {
 	fill: none;
 	stroke: #ed3700;
@@ -116,27 +121,40 @@ path {
 
 path.line-0 {
 fill: none;
-stroke: #ed3700;
+stroke: #0000ff;
 opacity: 0.5;
 stroke-width: 10;
 }
 
 path.line-1 {
 fill: none;
-stroke: #2b2929;
+stroke: #008000;
 opacity: 0.5;
 stroke-width: 10;
 }
 
-.highlight {
-	opacity: 1;
-	stroke-width: 15;
+.highlight_0 {
+fill: none;
+stroke: #0000ff;
+opacity: 1;
+stroke-width: 15;
 }
 
+.highlight_1 {
+fill: none;
+stroke: #008000;
+opacity: 1;
+stroke-width: 15;
+}
 
 .serie_label {
 fill: #2b2929;
 font-family: Georgia;
 font-size: 60%;
 padding: 5px 20px 5px 5px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }

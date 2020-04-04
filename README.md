@@ -4,7 +4,7 @@ This template will help you get started with your project. Please look through a
 
 ## The GitHub Pages Website
 
-Make sure you publish your project to github pages, and put the URL here: 
+Make sure you publish your project to github pages, and put the URL here: https://neu-ds-4200-s20.github.io/s-l-project-sbn-9-local-food/
 
 ## Setup
 
@@ -49,7 +49,7 @@ Each folder has an explanatory `README.md` file
 * `js` will contain all JavaScript files you write.
 
   * `visualization.js` is the main code that builds all your visualizations. Each visualization should be built following the [Reusable Chart model](https://bost.ocks.org/mike/chart/)
-  
+
 * `lib` will contain any JavaScript library you use. It currently includes D3.
 
 ## Workflow
@@ -73,4 +73,3 @@ Make sure to check these aspects of your work, which are important for every sub
 * Your visualization works as required:
     * Styles are consistent across views.
     * None of the visualizations change size or move on the screen as you interact with them.
-    

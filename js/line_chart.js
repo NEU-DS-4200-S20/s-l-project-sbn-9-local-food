@@ -26,7 +26,6 @@ function linechart() {
 
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
-
   function chart(selector, data) {
 
     let svg = d3.select(selector)
@@ -68,7 +67,8 @@ function linechart() {
     // X axis label
     xAxis.append("text")
         .attr("class", "axis")
-        .attr("transform", "translate(" + (width - 50) + ",-10)")
+        .attr("transform", "translate(" + (width / 2) + ",30)")
+        .attr("class", "axis_label")
         .text(xLabelText);
 
     // Y axis and label
@@ -79,6 +79,7 @@ function linechart() {
         .attr("transform", "rotate(-90) translate(-150, -28)")
         //.attr("transform", "translate(" + yLabelOffsetPx + ", -12)")
         .style("text-anchor", "end")
+        .attr("class", "axis_label")
         .text(yLabelText);
 
     const line = d3.line()
@@ -101,27 +102,14 @@ function linechart() {
       .attr("d", function(d) {
         return line(d.values)});
 
-      lines.append("text")
-      .attr("class","serie_label")
-      .datum(function(d) {
-          return {
-              id: d.id,
-              value: d.values[d.values.length - 1]}; })
-      .attr("transform", function(d) {
-              return "translate(" + (xScale(d.value.season) - 65)
-              + "," + (yScale(d.value.pallets) + 15 ) + ")"; })
-      .attr("x", 5)
-      .text(function(d) { return d.id; });
-
-
-
-
+    let line_class = ""
     svg.selectAll("path")
     .on('mousedown', function() {
-      const selection = d3.select(this).attr("class", "highlight")
+      line_class = this.getAttribute("class")
+      const selection = d3.select(this).attr("class", "highlight_" + line_class.slice(-1))
     })
     .on('mouseup', function() {
-    const selection = d3.select(this).attr("class", "path" + ids)
+    const selection = d3.select(this).attr("class", line_class)
     });
 
 

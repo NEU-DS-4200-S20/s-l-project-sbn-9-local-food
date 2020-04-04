@@ -1,3 +1,5 @@
+// AT THE MOMENT WE JUST PUT OLD CODE IN HERE WE HAVE NOT WORKED ON THE MAP YET
+
 /* global D3 */
 
 // Initialize a scatterplot. Modeled after Mike Bostock's
@@ -25,7 +27,7 @@ function scatterplot() {
     selectableElements = d3.select(null),
     dispatcher;
 
-  // Create the chart by adding an svg to the div with the id 
+  // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
   function chart(selector, data) {
     let svg = d3.select(selector)
@@ -55,13 +57,13 @@ function scatterplot() {
     let xAxis = svg.append("g")
         .attr("transform", "translate(0," + (height) + ")")
         .call(d3.axisBottom(xScale));
-        
+
     // X axis label
-    xAxis.append("text")        
+    xAxis.append("text")
         .attr("class", "axisLabel")
         .attr("transform", "translate(" + (width - 50) + ",-10)")
         .text(xLabelText);
-      
+
     let yAxis = svg.append("g")
         .call(d3.axisLeft(yScale))
       .append("text")
@@ -83,9 +85,9 @@ function scatterplot() {
         .attr("cx", X)
         .attr("cy", Y)
         .attr("r", 5);
-    
+
     selectableElements = points;
-    
+
     svg.call(brush);
 
     // Highlight points when brushed
@@ -97,7 +99,7 @@ function scatterplot() {
           [-margin.left, -margin.bottom],
           [width + margin.right, height + margin.top]
         ]);
-        
+
       ourBrush = brush;
 
       g.call(brush); // Adds the brush to this element
@@ -121,12 +123,12 @@ function scatterplot() {
         // Let other charts know about our selection
         dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
       }
-      
+
       function brushEnd(){
         // We don't want infinite recursion
         if(d3.event.sourceEvent.type!="end"){
           d3.select(this).call(brush.move, null);
-        }         
+        }
       }
     }
 
@@ -198,7 +200,7 @@ function scatterplot() {
     return chart;
   };
 
-  // Given selected data from another visualization 
+  // Given selected data from another visualization
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;

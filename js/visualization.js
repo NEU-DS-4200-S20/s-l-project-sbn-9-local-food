@@ -83,7 +83,7 @@ let line_norelation = [];
 			.selectionDispatcher(d3.dispatch(dispatchString))
 			("#linechart", linechart_data);
 
-
+		let legend = legend()
 		// parseBarChartData(data);
 		// parseMapData(data);c
 	});
