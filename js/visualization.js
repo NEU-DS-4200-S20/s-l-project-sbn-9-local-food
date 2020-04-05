@@ -1,4 +1,5 @@
 
+// Data arrays for CSV and individual visualizations
 let data_relation = [];
 let data_norelation = [];
 let relations = ["Trade relation", "No trade relation"];
@@ -13,7 +14,7 @@ let line_norelation = [];
 
 
 
-((() => {
+((() => { 
 
 	d3.csv("data/data.csv", (data) => {
 
@@ -61,10 +62,10 @@ let line_norelation = [];
 			}
 		});
 
+		// Format data for line chart
 		let line_relation = parseLineChartData(data_relation);
 		let line_norelation = parseLineChartData(data_norelation);
 		let linechart_unformatted = [line_relation, line_norelation]
-
 
 		relations.forEach(function(r,i) {
 			linechart_data.push({
@@ -73,7 +74,7 @@ let line_norelation = [];
 			});
 		});
 
-
+		// Call line chart function
 		let lcSeasonProduction = linechart()
 			.x(d => d.season)
 			.xLabel("Season")
@@ -83,14 +84,13 @@ let line_norelation = [];
 			.selectionDispatcher(d3.dispatch(dispatchString))
 			("#linechart", linechart_data);
 
-		let legend = legend()
 		// parseBarChartData(data);
 		// parseMapData(data);c
 	});
 
 })());
 
-
+// Computes averages of vendors' production volume per season and formats data
 function parseLineChartData(data) {
 
 	let tempArr = [];
@@ -111,6 +111,8 @@ function parseLineChartData(data) {
 	let winterVendorCount = 0;
 	let winterAverage;
 
+	// Get total volume and number of vendors
+	// Ignore "Not Applicable" results
 	data.forEach(function(row, i, arr) {
 		let springValue = row["Spring Capable Volume"];
 		let summerValue = row["Summer Capable Volume"];
@@ -135,6 +137,7 @@ function parseLineChartData(data) {
 		}
 	});
 
+	// Calculate averages
 	springAverage = springTotal / springVendorCount;
 	summerAverage = summerTotal / summerVendorCount;
 	fallAverage = fallTotal / fallVendorCount;
@@ -143,6 +146,7 @@ function parseLineChartData(data) {
 	let seasons = ["Spring", "Summer", "Fall", "Winter"];
 	averages = [springAverage, summerAverage, fallAverage, winterAverage];
 
+	// Format line chart data for better parsing
 	averages.forEach(function(d, i) {
 		tempArr.push({
 			season: seasons[i],

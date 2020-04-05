@@ -1,7 +1,6 @@
 /* global D3 */
 
-// Initialize a line chart. Modeled after Mike Bostock's
-// Reusable Chart framework https://bost.ocks.org/mike/chart/
+// Initialize a line chart
 function linechart() {
 
   let margin = {
@@ -15,7 +14,7 @@ function linechart() {
     xValue = d => d[0],
     yValue = d => d[1],
     xLabelText = "Season",
-    yLabelText = "Average Pallets Produced",
+    yLabelText = "Average Pallets Produced by Vendors",
     yLabelOffsetPx = 0,
     xScale = d3.scalePoint(),
     yScale = d3.scaleLinear(),
@@ -38,6 +37,7 @@ function linechart() {
     svg = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    // Create an area around points to ease selection of data via mouse hover
     const tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0)
@@ -82,21 +82,22 @@ function linechart() {
         .call(d3.axisLeft(yScale))
         .append("text")
         .attr("transform", "rotate(-90) translate(-130, -28)")
-        //.attr("transform", "translate(" + yLabelOffsetPx + ", -12)")
         .style("text-anchor", "end")
         .attr("class", "axis_label")
         .text(yLabelText);
 
+    // Create lines for chart
     const line = d3.line()
       .x(function(d) { return xScale(d.season);})
       .y(function(d) {return yScale(d.pallets); });
 
+    // Dynamically compute values for lines (for CSS reference)
     let id = 0;
     const ids = function () {
       return "line-"+id++;
     }
 
-
+    // add data to lines
     const lines = svg.selectAll("lines")
       .data(data)
       .enter()
@@ -107,6 +108,7 @@ function linechart() {
       .attr("d", function(d) {
         return line(d.values)});
 
+    // Add interactivity via mouse events
     let line_class = ""
     svg.selectAll("path")
     .on('mouseover', function() {
@@ -117,6 +119,7 @@ function linechart() {
     const selection = d3.select(this).attr("class", line_class)
     });
 
+    // Added (invisible) points so that user can view values on mouseover
     lines.selectAll("points")
     .data(function(d) {return d.values})
     .enter()
