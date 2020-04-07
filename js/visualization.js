@@ -2,7 +2,8 @@
 // Data arrays for CSV and individual visualizations
 let data_relation = [];
 let data_norelation = [];
-let relations = ["Trade relation", "No trade relation"];
+let relations1 = ["Trade relation", "No trade relation"];
+let relations2 = ["Yes", "No"];
 
 let map_data = [];
 let barchart_data = [];
@@ -11,7 +12,6 @@ let bar_norelation = [];
 let linechart_data = [];
 let line_relation = [];
 let line_norelation = [];
-
 
 
 ((() => { 
@@ -47,9 +47,9 @@ let line_norelation = [];
 			if(d["Do you have a goal for what percentage of your products you would like to sell wholesale?"] !== "Not Applicable") {
 				d["Do you have a goal for what percentage of your products you would like to sell wholesale?"] = +d["Do you have a goal for what percentage of your products you would like to sell wholesale?"];
 			}
-			if(d["Percent Change in Desired Wholesaling"] !== "Not Applicable") {
-				d["Percent Change in Desired Wholesaling"] = +d["Percent Change in Desired Wholesaling"];
-			}
+			// if(d["Percent Change in Desired Wholesaling"] !== "Not Applicable") {
+			// 	d["Percent Change in Desired Wholesaling"] = +d["Percent Change in Desired Wholesaling"];
+			// }
 
 		});
 
@@ -63,32 +63,83 @@ let line_norelation = [];
 		});
 
 		// Format data for line chart
-		let line_relation = parseLineChartData(data_relation);
-		let line_norelation = parseLineChartData(data_norelation);
-		let linechart_unformatted = [line_relation, line_norelation]
+		formatLineChartData();
 
-		relations.forEach(function(r,i) {
-			linechart_data.push({
-				id: r,
-				values: linechart_unformatted[i]
-			});
-		});
+		// Format data for bar chart
+		formatBarChartData();
+
+
+
+		// parseMapData(data);
 
 		// Call line chart function
 		let lcSeasonProduction = linechart()
-			.x(d => d.season)
-			.xLabel("Season")
-			.y(d => d.pallets)
-			.yLabel("Average Pallets Produced")
-			.yLabelOffset(40)
-			.selectionDispatcher(d3.dispatch(dispatchString))
-			("#linechart", linechart_data);
+			 .selectionDispatcher(d3.dispatch(dispatchString))
+			 ("#linechart", linechart_data);
 
-		// parseBarChartData(data);
-		// parseMapData(data);c
+		// Call the bar chart function
+		let bcProductionRelation = barchart()
+			.x(d => d.relation)
+			.xLabel("Does Vendor Have a Trade Relationship")
+			.y(d => d.percent)
+			.yLabel("Desired Percent Increase in Wholesaling")
+			.selectionDispatcher(d3.dispatch(dispatchString))
+			("#barchart", barchart_data);
+
 	});
 
 })());
+
+function formatBarChartData() {
+	// parseBarChartData(data);
+	let bar_relation = parseBarChartData(data_relation);
+	let bar_norelation = parseBarChartData(data_norelation); 
+	let barchart_unformatted = [bar_relation, bar_norelation]
+
+	relations2.forEach(function(r,i) {
+		barchart_data.push({
+			relation: r,
+			percent: barchart_unformatted[i]
+		})
+	})
+}
+
+// Calculates the desired increase in percentage of products the vendors would like to wholesale
+// Computes the average amounts for each vendor (for each trade relation)
+function parseBarChartData(data) {
+	let desiredPercentChange = [];
+	let totalDifference = 0;
+	let count = 0; 
+	let average;
+
+	data.forEach(function(row, i, arr) {
+		
+		let currentPercent = row["Approximately what percentage of your products do you currently sell wholesale?"];
+		let goalPercent = row["Do you have a goal for what percentage of your products you would like to sell wholesale?"];
+
+		if(currentPercent !== "Not Applicable" && goalPercent !== "Not Applicable") {
+			totalDifference += (goalPercent - currentPercent);
+
+			count++;
+		}
+	});
+	average = totalDifference/count;
+	return average;
+}
+
+// Formats the linechart data
+function formatLineChartData() {
+	let line_relation = parseLineChartData(data_relation);
+	let line_norelation = parseLineChartData(data_norelation);
+	let linechart_unformatted = [line_relation, line_norelation]
+
+	relations1.forEach(function(r,i) {
+		linechart_data.push({
+			id: r,
+			values: linechart_unformatted[i]
+		});
+	});
+} 
 
 // Computes averages of vendors' production volume per season and formats data
 function parseLineChartData(data) {
@@ -118,6 +169,7 @@ function parseLineChartData(data) {
 		let summerValue = row["Summer Capable Volume"];
 		let fallValue = row["Fall Capable Volume"];
 		let winterValue = row["Winter Capable Volume"];
+
 
 		if(springValue !== "Not Applicable") {
 			springTotal += springValue;

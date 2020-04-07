@@ -1,6 +1,182 @@
 
-function bar_chart() {
+function barchart() {
+
+   let margin = {
+      top: 60,
+      left: 65,
+      right: 30,
+      bottom: 35
+    },
+    width = 500 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom,
+    xValue = d => d[0],
+    yValue = d => d[1],
+    xLabelText = "Does Vendor Have a Trade Relationship",
+    yLabelText = "",
+    yLabelOffsetPx = 0,
+    xScale = d3.scaleBand(),
+    yScale = d3.scaleLinear(),
+    ourBrush = null,
+    selectableElements = d3.select(null),
+    dispatcher;
 
 
+  function chart(selector, data) {
+
+    let svg = d3.select(selector)
+      .append("svg")
+      .attr("perserveAspectRatio", "xMidYMid meet")
+      .attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom + 10].join(' '))
+      .classed("svg-content", true);
+
+
+    svg = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+     xScale 
+      .domain(["Yes", "No"])
+      .rangeRound([0, width])
+      .padding(0.05);
+
+     yScale.domain([0, 100])
+        .rangeRound([height, 0]);
+
+    let xAxis = svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0, " + (height) + ")")
+      .call(d3.axisBottom(xScale))
+      .append("text")        
+        .attr("transform", "translate(" + (width / 2) + ",40)")
+      .attr("class", "axis_label")
+      .text(xLabelText);
+
+  
+    // Y axis and label
+    let yAxis = svg.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(yScale))
+      .append("text")
+      .attr("transform", "rotate(-90) translate(-90, -40)")
+      .style("text-anchor", "end")
+      .attr("class", "axis_label")
+      .text(yLabelText);
+
+  let color = ["#0000ff", "#008000"];
+
+  let bar = d3.b
+
+      // append the rectangles for the bar chart
+  svg.selectAll(".bar")
+    .data(data)
+    .enter().append("rect")
+      //.attr("class", "bar")
+      .attr("fill", function(d, i) {
+        return color[i];
+      })
+      .style("opacity", 0.5)
+      .attr("x", function(d) { return xScale(d.relation); })
+      .attr("width", xScale.bandwidth())
+      .attr("y", function(d) { return yScale(d.percent); })
+      .attr("height", function(d) { return height - yScale(d.percent); })
+      .on('mouseover', function() {
+        const selection = d3.select(this).style("opacity", 1)
+      })
+      .on('mouseout', function() {
+        const selection = d3.select(this).style("opacity", 0.5)
+    });
+
+      svg.selectAll("text.bar")
+      .data(data)
+      .enter().append("text")
+      .attr("class", "bar")
+      .attr("text-anchor", "middle")
+      .attr("x", function(d) { return xScale(d.relation) + (width/4); })
+      .attr("y", function(d) { return yScale(d.percent) - 5; })
+      .text(function(d) { return d.percent.toFixed(0) + "%"; });
+
+
+    return chart;
+  }
+
+    // The x-accessor from the datum
+  function X(d) {
+    return xScale(xValue(d));
+  }
+
+  // The y-accessor from the datum
+  function Y(d) {
+    return yScale(yValue(d));
+  }
+
+  chart.margin = function (_) {
+    if (!arguments.length) return margin;
+    margin = _;
+    return chart;
+  };
+
+  chart.width = function (_) {
+    if (!arguments.length) return width;
+    width = _;
+    return chart;
+  };
+
+  chart.height = function (_) {
+    if (!arguments.length) return height;
+    height = _;
+    return chart;
+  };
+
+  chart.x = function (_) {
+    if (!arguments.length) return xValue;
+    xValue = _;
+    return chart;
+  };
+
+  chart.y = function (_) {
+    if (!arguments.length) return yValue;
+    yValue = _;
+    return chart;
+  };
+
+  chart.xLabel = function (_) {
+    if (!arguments.length) return xLabelText;
+    xLabelText = _;
+    return chart;
+  };
+
+  chart.yLabel = function (_) {
+    if (!arguments.length) return yLabelText;
+    yLabelText = _;
+    return chart;
+  };
+
+  chart.yLabelOffset = function (_) {
+    if (!arguments.length) return yLabelOffsetPx;
+    yLabelOffsetPx = _;
+    return chart;
+  };
+
+  // Gets or sets the dispatcher we use for selection events
+  chart.selectionDispatcher = function (_) {
+    if (!arguments.length) return dispatcher;
+    dispatcher = _;
+    return chart;
+  };
+
+  // Given selected data from another visualization
+  // select the relevant elements here (linking)
+  chart.updateSelection = function (selectedData) {
+    if (!arguments.length) return;
+
+    // Select an element if its datum was selected
+    selectableElements.classed("selected", d => {
+      return selectedData.includes(d)
+    });
+  };
+
+
+
+  return chart;
 
 }

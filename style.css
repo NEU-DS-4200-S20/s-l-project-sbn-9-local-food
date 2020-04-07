@@ -136,6 +136,10 @@ opacity: 0.8;
   flex: 0 0 40%;
 }
 
+.barchart-holder {
+  flex: 0 0 40%;
+}
+
 .axis line{
 stroke: #706f6f;
 stroke-width: 0.5;
@@ -159,12 +163,6 @@ font-size: 120%;
 .axis_label {
 	font-weight: bold;
 	font-size: 200%;
-}
-
-path {
-	fill: none;
-	stroke: #ed3700;
-	stroke-width: 7;
 }
 
 path.line-0 {
@@ -211,4 +209,16 @@ table, th, td {
 stroke: none;
 fill: #D3D3D3;
 }
+
+.bar { fill: steelblue; }
+
+.tick line{
+      visibility:hidden;
+    }
+
+    .grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.6;
+    shape-rendering: crispEdges
+  }
 

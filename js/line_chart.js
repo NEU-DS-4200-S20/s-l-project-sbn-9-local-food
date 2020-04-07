@@ -10,7 +10,7 @@ function linechart() {
       bottom: 35
     },
     width = 500 - margin.left - margin.right,
-    height = 550 - margin.top - margin.bottom,
+    height = 500 - margin.top - margin.bottom,
     xValue = d => d[0],
     yValue = d => d[1],
     xLabelText = "Season",
@@ -21,7 +21,6 @@ function linechart() {
     ourBrush = null,
     selectableElements = d3.select(null),
     dispatcher;
-
 
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
@@ -81,7 +80,7 @@ function linechart() {
         .attr("class", "axis")
         .call(d3.axisLeft(yScale))
         .append("text")
-        .attr("transform", "rotate(-90) translate(-130, -28)")
+        .attr("transform", "rotate(-90) translate(-100, -35)")
         .style("text-anchor", "end")
         .attr("class", "axis_label")
         .text(yLabelText);
@@ -141,8 +140,10 @@ function linechart() {
         tooltip.transition()
     .duration(200)
     .delay(30)
-    .style("opacity", 1);
-    
+    .style("opacity", 1)
+    .style("color", "steelblue")
+    .style("font-size", "110%")
+
         tooltip.html(d.pallets.toFixed(1))
     .style("left", (d3.event.pageX + 25) + "px")
     .style("top", (d3.event.pageY) + "px")})
