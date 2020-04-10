@@ -1,3 +1,19 @@
+TODO LIST:
+
+	CODE
+1. add map Visualization
+2. brushing and linking
+3. add points to linechart
+4. give Visualizations titles
+5. fix css to arrange Visualizations
+6. make legend clearer
+
+	WRITE-UP
+1. Sprint 1 Usability Results in google doc
+2. potentially visualization explanation, design choices, and conclusion
+
+
+
 
 
 Visualization
@@ -18,7 +34,7 @@ Visualization
 		- Winter
 		- Spring
 		- Summer
-	- Capable 
+	- Capable
 
 	File Modification:
 	- Rewrite pallet columns for each season - take average (one number)
@@ -61,21 +77,3 @@ Visualization
 	- Remove obviously unimportant words that aren't food
 	- Add two columns with longitude and latitude for each zip code
 		- (1921) Achieve this by creating slightly different longitudes and latitudes
-
-
-
-TASK 1 - DATA CLEANING (DUE 4/1)
-	Rahul
-	- Line Chart
-
-	Eric
-	- Bar Chart
-
-	Alex and Sidney
-	- Maps (1-18 alex)
-
-TASK 2 - CODE
-	- Meet friday, saturday
-
-TASK 3 - WRITEUPS
-	- Finish on Sunday
