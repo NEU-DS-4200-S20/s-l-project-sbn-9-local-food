@@ -222,3 +222,7 @@ fill: #D3D3D3;
     shape-rendering: crispEdges
   }
 
+  .zipcode {
+  	fill: #2b2929;
+  }
+

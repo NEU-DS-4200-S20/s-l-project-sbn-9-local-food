@@ -12,6 +12,8 @@ let bar_norelation = [];
 let linechart_data = [];
 let line_relation = [];
 let line_norelation = [];
+let map_relation = [];
+let map_norelation = [];
 
 
 ((() => { 
@@ -47,9 +49,7 @@ let line_norelation = [];
 			if(d["Do you have a goal for what percentage of your products you would like to sell wholesale?"] !== "Not Applicable") {
 				d["Do you have a goal for what percentage of your products you would like to sell wholesale?"] = +d["Do you have a goal for what percentage of your products you would like to sell wholesale?"];
 			}
-			// if(d["Percent Change in Desired Wholesaling"] !== "Not Applicable") {
-			// 	d["Percent Change in Desired Wholesaling"] = +d["Percent Change in Desired Wholesaling"];
-			// }
+
 
 		});
 
@@ -69,8 +69,10 @@ let line_norelation = [];
 		formatBarChartData();
 
 
+		 formatMapData(data);
 
-		// parseMapData(data);
+		// longitude latitude zipcode food trade relation
+
 
 		// Call line chart function
 		let lcSeasonProduction = linechart()
@@ -86,9 +88,79 @@ let line_norelation = [];
 			.selectionDispatcher(d3.dispatch(dispatchString))
 			("#barchart", barchart_data);
 
+
+		let mpVendorFood = map({
+			'backgroundImage': 'images/local_map.png'
+		})
+		.x(d => d.longitude)
+		.y(d => d.latitude)
+		.selectionDispatcher(d3.dispatch(dispatchString))
+		// .r(d => d.relation)
+		// .f(d => d.food)
+		// .z(d => d.zipcode)
+		("#map", map_data);
 	});
 
 })());
+
+function formatMapData(data) {
+	map_data = parseMapData(data);
+	// let map_norelation = parseMapData(data_norelation);
+	//let map_unformatted = [map_relation, map_norelation];
+
+
+	// map_data.forEach(function(d) {
+	// 	console.log(d);
+	// })
+}
+
+
+function parseMapData(data) {
+
+	let tempArr = [];
+
+	data.forEach(function(row, i, arr) {
+
+		let mapDict = {};
+
+
+		let longitude = row["Longitude"];
+		let latitude = row["Latitude"];
+		let zipcode = row["Mailing Address (Zip Code)"];
+
+
+		let vendorFood = row["Please list the specialty crop(s) that you produce or are contained in your product(s)."];
+		let relationStatus = row["Does your company currently have a trade relationship with a buyer?"];
+
+		let newStr = "";
+		for (var i = 0; i < vendorFood.length; i++) {
+			if( vendorFood[i] == '?') {
+				newStr = newStr + ", ";
+				i++;
+			}
+  			newStr = newStr + vendorFood[i];
+		}
+
+		//tempArr.push(newStr); 
+
+		mapDict = {
+			latitude: latitude,
+			longitude: longitude,
+			zipcode: zipcode,
+			food: newStr,
+			relation: relationStatus,
+		};
+
+		tempArr.push(mapDict);
+	});
+
+	
+
+
+
+	return tempArr; 
+
+}
 
 function formatBarChartData() {
 	// parseBarChartData(data);
