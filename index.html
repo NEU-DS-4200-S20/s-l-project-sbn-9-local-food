@@ -70,12 +70,12 @@
         <table>
             <tr>
                 <th>Zipcode</th>
-                <th>Food Types Produced</th> 
-                <th>Trade Relation Status</th> 
+                <th>Food Types Produced</th>
+                <th>Trade Relation Status</th>
             </tr>
         </table>
     </div>
-    
+
 
   </div>
 
@@ -107,8 +107,7 @@
     The points indicate zipcodes, which include all the vendors present in that zipcode. If there vendors in the same zipcode with a different trade relation, they are given a separate point (by modifying the latitude and longitude values very slightly). This prevents occlusion if many vendors are added (grouped by zipcode- at most two points per zipcode). This also enables the points to be color coded based on trade relationship status. The user can hover over a point for details on demand: the food produced and zipcode. Because there may be multiple vendors associated with a zipcode, the food items of the vendors are concatenated. The user can select a point, which increases its opacity, and this selects all data points acorss the visualization that indicate vendors with the same trade relation status.
 
     <p><strong><u>UI Walk-through</u></strong></p>
-    The user may interact with any visualization to start with. For the line chart, the user may hover over the lines to get the exact quantities produced. The user can select a line (with trade relation, for example) to highlight (by increasing opacity) all the points on the map and corresponding bar with the same trade relation status. The bar chart has similar functionality, as this linking goes both ways. For the map, the user can hover over a point to see which zipcode it corresponds to and what food items are produced. The user can select a point to get all the data on the visualization higlighted (increased opacity) with the same trade relation status; this will not highlight the other points on the map, jus the line and bar with the same trade relation status.
-
+    The user may interact with any visualization to start with. For the line chart, the user may hover over the lines to get the exact quantities produced at specific points. The user can select a line (with trade relation, for example) to highlight (by increasing opacity) all the points on the map and corresponding bar with the same trade relation status. The bar chart has similar functionality, as this linking goes both ways. For the map, the user can brush a section of points to get more information about them in a chart next to the map (zipcode, food types produced, and trade relationship status). By brushing over those points the user will also highlight all the data with the corresponding trade relationships in the other 2 visualizations. For example, if you brush over data without a trade relationship in the map, the data in the other visualizations without a trade relationship with also be highlighted. If you brush over data with and without a trade relationship in the map, the data in the other visualizations with and without a trade relationship with also be highlighted.
     <p><strong>[INSERT SCREENSHOT OF DEFAULT VISUALIZATION]</strong></p>
 
     <p><strong>[INSERT SCREENSHOT OF USER HOVERING OVER A POINT ON LINE CHART]</strong></p>
@@ -349,6 +348,7 @@
       <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
       <li><a href="http://datawanderings.com/2019/11/01/tutorial-making-an-interactive-line-chart-in-d3-js-v-5/">TUTORIAL: Making an Interactive Line Chart in D3.js v.5</a> by Eve the Analyst.</li>
       <li><a href="http://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/">TUTORIAL: Making a Line Chart in D3.js v.5</a> by Eve the Analyst.</li>
+      <li><a href="http://bl.ocks.org/feyderm/6bdbc74236c27a843db633981ad22c1b">Scatter plot + Brush</a> by Michael Feyder.</li>
     </ul>
 
   </div>
