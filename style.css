@@ -226,3 +226,11 @@ fill: #D3D3D3;
   	fill: #2b2929;
   }
 
+  .barSelected {
+  	fill: #FF00FF;
+  }
+
+  .lineSelected {
+  	fill: #FF00FF;
+  }
+

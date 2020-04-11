@@ -61,16 +61,17 @@ function map(opts={}) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-
-    // let Tooltip = d3.select(selector)
-    //   .append("div")
-    //   .attr("class", "tooltip")
-    //   .style("opacity", 1)
-    //   .style("background-color", "white")
-    //   .style("border", "solid")
-    //   .style("border-width", "2px")
-    //   .style("border-radius", "5px")
-    //   .style("padding", "5px")
+/*
+     let Tooltip = d3.select(selector)
+       .append("div")
+       .attr("class", "tooltip")
+       .style("min-height", "500px")
+       .style("opacity", 1)
+       .style("background-color", "white")
+       .style("border", "solid")
+       .style("border-width", "2px")
+       .style("border-radius", "5px")
+       .style("padding", "5px")*/
 
     //Define scales
     xScale
@@ -87,6 +88,8 @@ function map(opts={}) {
       ])
       .rangeRound([height, 0]);
 
+
+
     // Add the points
     let points = svg.append("g")
       .selectAll(".scatterPoint")
@@ -96,6 +99,22 @@ function map(opts={}) {
     
     points.exit().remove();
 
+
+/*
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(d) {
+      console.log("HIT")
+      Tooltip.style("opacity", 1)
+    }
+    var addTooltip = function(d) {
+       Tooltip
+         .html("Zipcode: " + d.zipcode + "<br>" + "Food Types Produced: " + d.food)
+         .style("left", (d3.mouse(this)[0]+10) + "px")
+         .style("top", (d3.mouse(this)[1]) + "px")
+    }
+    var mouseleave = function(d) {
+      Tooltip.style("opacity", 0)
+    }*/
 
     points = points.enter()
       .append("circle")
@@ -114,34 +133,24 @@ function map(opts={}) {
           return "blue";
         }
       })
-       .attr("opacity", 0.7)
-       .on("mouseover", mouseover)
-       .on("mousemove", mousemove)
-       .on("mouseleave", mouseleave);;    
+       .attr("opacity", 0.7);
+     //  .on("mouseover", mouseover)
+     //  .on("mousemove", mousemove)
+     //  .on("mouseleave", mouseleave);    
 
 
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function(d) {
-      console.log("HIT")
-      Tooltip.style("opacity", 1)
-    }
-    var mousemove = function(d) {
-       Tooltip
-         .html("Zipcode: " + d.zipcode + "<br>" + "Food Types Produced: " + d.food)
-         .style("left", (d3.mouse(this)[0]+10) + "px")
-         .style("top", (d3.mouse(this)[1]) + "px")
-    }
-    var mouseleave = function(d) {
-      Tooltip.style("opacity", 0)
-    }
+
 
     
     selectableElements = points;
-    
-    svg.call(brush);
+     svg.call(brush);
+
+   
 
     // Highlight points when brushed
     function brush(g) {
+      console.log("BRUSH");
+
       const brush = d3.brush() // Create a 2D interactive brush
         .on("start brush", highlight) // When the brush starts/continues do...
         .on("end", brushEnd) // When the brush ends do...
@@ -156,6 +165,7 @@ function map(opts={}) {
 
       // Highlight the selected circles
       function highlight() {
+        console.log("HIT highlight");
         if (d3.event.selection === null) return;
         const [
           [x0, y0],
@@ -164,8 +174,10 @@ function map(opts={}) {
 
         // If within the bounds of the brush, select it
         points.classed("selected", d =>
+             
           x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
-        );
+
+        )
 
         // Get the name of our dispatcher's event
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
@@ -175,11 +187,65 @@ function map(opts={}) {
       }
       
       function brushEnd(){
+
+         if (!d3.event.selection) return;
+
+            // programmed clearing of brush after mouse-up
+            // ref: https://github.com/d3/d3-brush/issues/10
+            d3.select(this).call(brush.move, null);
+
+            var d_brushed =  d3.selectAll(".selected").data();
+
+            // populate table if one or more elements is brushed
+            if (d_brushed.length > 0) {
+                clearTableRows();
+                d_brushed.forEach(d_row => populateTableRow(d_row))
+            } else {
+                clearTableRows();
+          }
+
         // We don't want infinite recursion
         if(d3.event.sourceEvent.type!="end"){
+
           d3.select(this).call(brush.move, null);
         }         
       }
+
+
+      function clearTableRows() {
+
+            hideTableColNames();
+            d3.selectAll(".row_data").remove();
+      }
+
+      function hideTableColNames() {
+          d3.select("table").style("visibility", "hidden");
+      }
+
+      function showTableColNames() {
+          d3.select("table").style("visibility", "visible");
+      }
+
+      function populateTableRow(d_row) {
+
+            showTableColNames();
+
+            var d_row_filter = [d_row.zipcode, 
+                               d_row.food, 
+                                d_row.relation];
+
+            d3.select("table")
+              .append("tr")
+              .attr("class", "row_data")
+              .selectAll("td")
+              .data(d_row_filter)
+              .enter()
+              .append("td")
+              .attr("align", (d, i) => i == 0 ? "left" : "right")
+              .text(d => d);
+      }
+
+
     }
 
     return chart;
@@ -259,6 +325,8 @@ function map(opts={}) {
 
     // Select an element if its datum was selected
     selectableElements.classed("selected", d => {
+    console.log(d);
+
       return selectedData.includes(d)
     });
 

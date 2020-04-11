@@ -113,6 +113,15 @@ function linechart() {
     .on('mouseover', function() {
       line_class = this.getAttribute("class")
       const selection = d3.select(this).attr("class", "highlight_" + line_class.slice(-1))
+    }).
+    on('mousedown', function() {
+      const selection = d3.select(this).attr("class", "lineSelected")
+    }).
+    on('mouseup', function() {
+      let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+      dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()["id"]);
+
+    console.log(svg.selectAll(".lineSelected").data()["id"])
     })
     .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
@@ -153,6 +162,8 @@ function linechart() {
     .style("opacity", 0);  
     });
 
+
+    
 
     return chart;
   }
@@ -227,10 +238,17 @@ function linechart() {
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
 
-    // Select an element if its datum was selected
-    selectableElements.classed("selected", d => {
+     selectableElements.classed("selected", d => {
+    console.log(d);
+
       return selectedData.includes(d)
     });
+
+    // Select an element if its datum was selected
+    // selectableElements.classed("selected", d => {
+    //   return selectedData.includes(d)
+    // });
+
   };
 
   return chart;

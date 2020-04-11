@@ -99,6 +99,27 @@ let map_norelation = [];
 		// .f(d => d.food)
 		// .z(d => d.zipcode)
 		("#map", map_data);
+
+
+
+		lcSeasonProduction.selectionDispatcher().on(dispatchString, function(selectedData) {
+			bcProductionRelation.updateSelection(selectedData);
+			mpVendorFood.updateSelection(selectedData);
+		});
+
+
+		bcProductionRelation.selectionDispatcher().on(dispatchString, function(selectedData) {
+			lcSeasonProduction.updateSelection(selectedData);
+			mpVendorFood.updateSelection(selectedData);
+		});
+
+
+		mpVendorFood.selectionDispatcher().on(dispatchString, function(selectedData) {
+			lcSeasonProduction.updateSelection(selectedData);
+			bcProductionRelation.updateSelection(selectedData);
+		});
+
+
 	});
 
 })());
@@ -205,7 +226,7 @@ function formatLineChartData() {
 	let line_norelation = parseLineChartData(data_norelation);
 	let linechart_unformatted = [line_relation, line_norelation]
 
-	relations1.forEach(function(r,i) {
+	relations2.forEach(function(r,i) {
 		linechart_data.push({
 			id: r,
 			values: linechart_unformatted[i]

@@ -82,6 +82,16 @@ function barchart() {
       .on('mouseover', function() {
         const selection = d3.select(this).style("opacity", 1)
       })
+      .on('mousedown', function() {
+        const selection = d3.select(this).attr("class", "barSelected")
+      }).
+      on('mouseup', function() {
+
+      let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+      dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()["relation"]);
+
+          console.log(svg.selectAll(".barSelected").data()["relation"])
+      })
       .on('mouseout', function() {
         const selection = d3.select(this).style("opacity", 0.5)
     });
@@ -94,6 +104,9 @@ function barchart() {
       .attr("x", function(d) { return xScale(d.relation) + (width/4); })
       .attr("y", function(d) { return yScale(d.percent) - 5; })
       .text(function(d) { return d.percent.toFixed(0) + "%"; });
+
+
+
 
 
     return chart;
