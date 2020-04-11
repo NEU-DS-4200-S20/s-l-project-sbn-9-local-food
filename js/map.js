@@ -90,58 +90,50 @@ function map(opts={}) {
     // Add the points
     let points = svg.append("g")
       .selectAll(".scatterPoint")
-        .data(data)
-        .on("mouseover", mouseover)
-      .on("mousemove", mousemove)
-      .on("mouseleave", mouseleave);
+      .data(data);
+   
         
     
-
-
     points.exit().remove();
 
 
     points = points.enter()
       .append("circle")
-        .attr("class", "")
+      .attr("class", "")
       .merge(points)
-        .attr("cx", X)
-        .attr("cy", Y)
-         .attr("r", (d) => { return 5; })
-         .attr("relation", (d) => { return d.relation})
-          .attr("zipcode", (d) => { return d.zipcode})
-             .attr("food", (d) => { return d.food})
-        .attr("fill", (d) => {
-          if(d.relation == "no") {
-            return "green";
-          } else {
-            return "blue";
-          }
-        })
-           .attr("opacity", 0.7);
-
-      //points.selectAll(".scatterPoint")
-    
+      .attr("cx", X)
+      .attr("cy", Y)
+      .attr("r", (d) => { return 5; })
+      .attr("relation", (d) => { return d.relation})
+      .attr("zipcode", (d) => { return d.zipcode})
+      .attr("food", (d) => { return d.food})
+      .attr("fill", (d) => {
+        if(d.relation == "no") {
+          return "green";
+        } else {
+          return "blue";
+        }
+      })
+       .attr("opacity", 0.7)
+       .on("mouseover", mouseover)
+       .on("mousemove", mousemove)
+       .on("mouseleave", mouseleave);;    
 
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(d) {
       console.log("HIT")
-      //Tooltip.style("opacity", 1)
+      Tooltip.style("opacity", 1)
     }
     var mousemove = function(d) {
-      // Tooltip
-      //   .html("Zipcode: " + d.zipcode + "<br>" + "Food Types Produced: " + d.food)
-      //   .style("left", (d3.mouse(this)[0]+10) + "px")
-      //   .style("top", (d3.mouse(this)[1]) + "px")
+       Tooltip
+         .html("Zipcode: " + d.zipcode + "<br>" + "Food Types Produced: " + d.food)
+         .style("left", (d3.mouse(this)[0]+10) + "px")
+         .style("top", (d3.mouse(this)[1]) + "px")
     }
     var mouseleave = function(d) {
-      //Tooltip.style("opacity", 0)
+      Tooltip.style("opacity", 0)
     }
-
-
-
-
 
     
     selectableElements = points;
