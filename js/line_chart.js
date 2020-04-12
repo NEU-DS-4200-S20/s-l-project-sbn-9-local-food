@@ -107,7 +107,11 @@ function linechart() {
       .attr("d", function(d) {
         return line(d.values)});
 
+<<<<<<< HEAD
       console.log(lines)
+=======
+    selectableElements = lines;
+>>>>>>> 88502908492a400e3c9709444888b7b45ea856fc
 
     // Add interactivity via mouse events
     let line_class = ""
@@ -121,9 +125,13 @@ function linechart() {
     }).
     on('mouseup', function() {
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+<<<<<<< HEAD
       dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()["id"]);
 
     console.log(svg.selectAll(".lineSelected").data()[0]["id"])
+=======
+      dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()[0]['id']);
+>>>>>>> 88502908492a400e3c9709444888b7b45ea856fc
     })
     .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
@@ -134,8 +142,8 @@ function linechart() {
     .data(function(d) {return d.values})
     .enter()
     .append("circle")
-    .attr("cx", function(d) { return xScale(d.season); })       
-    .attr("cy", function(d) { return yScale(d.pallets); })     
+    .attr("cx", function(d) { return xScale(d.season); })
+    .attr("cy", function(d) { return yScale(d.pallets); })
     .attr("r", 0)
     .attr("class","point")
 
@@ -143,8 +151,8 @@ function linechart() {
     .data(function(d) { return(d.values); } )
     .enter()
     .append("circle")
-    .attr("cx", function(d) { return xScale(d.season); })       
-    .attr("cy", function(d) { return yScale(d.pallets); })     
+    .attr("cx", function(d) { return xScale(d.season); })
+    .attr("cy", function(d) { return yScale(d.pallets); })
     .attr('r', 10)
     .style("opacity", 0)
     .on('mouseover', function(d) {
@@ -158,14 +166,14 @@ function linechart() {
         tooltip.html(d.pallets.toFixed(1))
     .style("left", (d3.event.pageX + 25) + "px")
     .style("top", (d3.event.pageY) + "px")})
-    .on("mouseout", function(d) {       
-    tooltip.transition()        
-    .duration(200)      
-    .style("opacity", 0);  
+    .on("mouseout", function(d) {
+    tooltip.transition()
+    .duration(200)
+    .style("opacity", 0);
     });
 
 
-    
+
 
     return chart;
   }
@@ -239,16 +247,22 @@ function linechart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
+    console.log(selectedData)
 
+<<<<<<< HEAD
      selectableElements.classed("selected", d => {
       console.log(d)
       return selectedData.includes(d)
+=======
+
+    selectableElements.classed("barSelected", d => {
+      if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
+        console.log(d)
+        return selectedData.includes(d)
+      }
+>>>>>>> 88502908492a400e3c9709444888b7b45ea856fc
     });
 
-    // Select an element if its datum was selected
-    // selectableElements.classed("selected", d => {
-    //   return selectedData.includes(d)
-    // });
 
   };
 
