@@ -120,6 +120,9 @@ function map(opts={}) {
       .append("circle")
       .attr("class", "")
       .merge(points)
+      .attr("id", (d) => {
+        return d.relation
+      })
       .attr("cx", X)
       .attr("cy", Y)
       .attr("r", (d) => { return 5; })
@@ -169,9 +172,19 @@ function map(opts={}) {
         ] = d3.event.selection;
 
         // If within the bounds of the brush, select it
-        points.classed("selected", d =>
+        points.classed("selected", function(d) {
+            //console.log(d);
+            if(x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1) {
+              console.log(d)
+              var id = d.relation;
+              d3.selectAll('#No')
+                .style("stroke", "#000000")
+            }
+            return x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
 
-          x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
+
+        }
+
 
         )
 
@@ -319,13 +332,13 @@ function map(opts={}) {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    console.log(selectedData);
+   //console.log(selectedData);
     // Select an element if its datum was selected
 
 
     selectableElements.classed("selected", d => {
       if (d['relation'] == selectedData.toLowerCase()) {
-        console.log(d)
+       //console.log(d)
         return selectedData.includes(d)
       }
     });

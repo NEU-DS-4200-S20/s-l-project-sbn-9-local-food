@@ -187,7 +187,7 @@ function barchart() {
     // Select an element if its datum was selected
     selectableElements.classed("barSelected", d => {
       if (d['relation'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-        console.log(d)
+        //console.log(d)
         return selectedData.includes(d)
       }
     });
