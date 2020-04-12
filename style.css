@@ -173,6 +173,7 @@ font-size: 120%;
 	font-size: 200%;
 }
 
+
 path.line-0 {
 fill: none;
 stroke: #0000ff;
@@ -186,6 +187,7 @@ stroke: #008000;
 opacity: 0.5;
 stroke-width: 7;
 }
+
 
 .highlight_0 {
 fill: none;
@@ -266,9 +268,7 @@ fill: #D3D3D3;
   	fill: #FF00FF;
   }
 
-  .lineSelected {
-  	fill: #FF00FF;
-  }
+
 
 	.selected {
 		fill: #FF0000;

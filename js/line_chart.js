@@ -42,13 +42,6 @@ function linechart() {
       .style("opacity", 0)
       .style("position", "absolute");
 
-    svg.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", (margin.top /4))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("font-weight", "bold")  
-        .text("Food Produced by Vendors in Each Season")
 
     //Define scales
     xScale
@@ -128,7 +121,7 @@ function linechart() {
       const selection = d3.select(this).attr("class", "highlight_" + line_class.slice(-1))
     }).
     on('mousedown', function() {
-      const selection = d3.select(this).attr("class", "lineSelected")
+      //const selection = d3.select(this).attr("class", "lineSelected")
       //d3.selectAll('circle').selectAll("#yes").style("fill", "#FF0000")
 
       d3.select("#map").selectAll("#yes")
@@ -181,7 +174,6 @@ function linechart() {
     .attr("cy", function(d) { return yScale(d.pallets); })
     .attr("r", 8)
     .attr("class","point")
-
 
     lines.selectAll("circles")
     .data(function(d) { return(d.values); } )

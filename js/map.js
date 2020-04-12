@@ -203,6 +203,7 @@ function map(opts={}) {
 
         d3.select("#map").selectAll("#" + this.id)
           .style("fill", "#FF0000")
+          .style("opacity", 1)
 
 
               d3.select("#linechart").selectAll("#" + id).style("stroke", "#FF0000");

@@ -89,9 +89,7 @@ function barchart() {
       .attr("width", xScale.bandwidth())
       .attr("y", function(d) { return yScale(d.percent); })
       .attr("height", function(d) { return height - yScale(d.percent); })
-      .on('mouseover', function() {
-        const selection = d3.select(this).style("opacity", 1)
-      })
+     
       .on('mousedown', function() {
         //console.log(d3.select(this))
         //const selection = d3.select(this).attr("class", "barSelected")
@@ -129,10 +127,8 @@ function barchart() {
 
     //  let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
      // dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()[0]["relation"]);
-      })
-      .on('mouseout', function() {
-         const selection = d3.select(this).style("opacity", 0.5)
-    });
+      });
+  
 
       svg.selectAll("text.bar")
       .data(data)
