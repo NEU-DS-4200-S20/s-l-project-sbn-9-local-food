@@ -183,7 +183,7 @@ function map(opts={}) {
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
 
         // Let other charts know about our selection
-        dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
+        dispatcher.call(dispatchString, this, svg.selectAll(".selected").data()[0]['relation']);
       }
       
       function brushEnd(){
@@ -325,7 +325,6 @@ function map(opts={}) {
 
     // Select an element if its datum was selected
     selectableElements.classed("selected", d => {
-    console.log(d);
 
       return selectedData.includes(d)
     });

@@ -88,7 +88,7 @@ function barchart() {
       on('mouseup', function() {
 
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-      dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()["relation"]);
+      dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()[0]["relation"]);
 
           console.log(svg.selectAll(".barSelected").data()["relation"])
       })
@@ -184,9 +184,9 @@ function barchart() {
 
     // Select an element if its datum was selected
     selectableElements.classed("selected", d => {
+
       return selectedData.includes(d)
-    });
-  };
+    });  };
 
 
 

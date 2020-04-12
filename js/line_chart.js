@@ -107,6 +107,8 @@ function linechart() {
       .attr("d", function(d) {
         return line(d.values)});
 
+      console.log(lines)
+
     // Add interactivity via mouse events
     let line_class = ""
     svg.selectAll("path")
@@ -121,7 +123,7 @@ function linechart() {
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
       dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()["id"]);
 
-    console.log(svg.selectAll(".lineSelected").data()["id"])
+    console.log(svg.selectAll(".lineSelected").data()[0]["id"])
     })
     .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
@@ -239,8 +241,7 @@ function linechart() {
     if (!arguments.length) return;
 
      selectableElements.classed("selected", d => {
-    console.log(d);
-
+      console.log(d)
       return selectedData.includes(d)
     });
 
