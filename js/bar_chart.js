@@ -181,11 +181,13 @@ function barchart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData);
+    //console.log(selectedData)
+
     // Select an element if its datum was selected
     selectableElements.classed("barSelected", d => {
-      if (d['relation'] == selectedData) {
-        d.attr("class", "barSelected");
+      if (d['relation'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
+        //console.log(d)
+        return selectedData.includes(d)
       }
     });
   };

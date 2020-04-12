@@ -237,28 +237,15 @@ function linechart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData);
+    //console.log(selectedData)
 
-    console.log(selectableElements)
 
-    if (selectedData == "yes") {
-      console.log(selectableElements[0])
-      d3.select(selectableElements[0]).attr("class", "lineSelected")
-    } else {
-      console.log(selectableElements[1])
-      d3.select(selectableElements[1]).attr("class", "lineSelected")
-    }
-    //  selectableElements.classed("lineSelected", d => {
-    //    if (d['id'] == selectedData) {
-    //      d3.select(d).attr("class", "lineSelected");
-    //    }
-    // });
-
-    // selectableElements.forEach(d => {
-    //   if (d['id'] == selectedData) {
-    //         d3.select(d).attr("class", "lineSelected");
-    //      }
-    // })
+    selectableElements.classed("barSelected", d => {
+      if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
+        //console.log(d)
+        return selectedData.includes(d)
+      }
+    });
 
 
   };

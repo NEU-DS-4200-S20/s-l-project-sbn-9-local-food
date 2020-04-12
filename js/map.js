@@ -321,9 +321,12 @@ function map(opts={}) {
     if (!arguments.length) return;
     //console.log(selectedData);
     // Select an element if its datum was selected
+
+
     selectableElements.classed("selected", d => {
-      if (d['relation'] == selectedData) {
-        d.attr("class", "selected");
+      if (d['relation'] == selectedData.toLowerCase()) {
+        //console.log(d)
+        return selectedData.includes(d)
       }
     });
 
