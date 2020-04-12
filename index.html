@@ -106,24 +106,24 @@
     <p><u>Bar Chart</u></p>
     The two bars represent vendors with and without trade relationship, with color coding to indicate this. For this visualization, we took the average desired percent increase in wholesaling for vendors (based on trade relationship). The numbers on top of the bars make it easier to interpret the chart, and the juxtaposition of the two bars clearly shows that there is opportunity in establishing trade relationships with vendors: increased wholesaling. The user can select a bar, which increases its opacity, and this selects all data points acorss the visualization that indicate vendors with the same trade relation status.
     <p><u>Map</u></p>
-    The points indicate zipcodes, which include all the vendors present in that zipcode. If there are vendors in the same zipcode with a different trade relation, they are given a separate point (by modifying the latitude and longitude values very slightly). This prevents occlusion if many vendors are added (grouped by zipcode- at most two points per zipcode). This also enables the points to be color coded based on trade relationship status. The user can highlight one or many points by clicking and dragging over them. This provides details on demand, displaying a table beside the map (but only the rows for the points that have been selected) which shows each point's zip code and the food produced by the vendor located there. 
+    The points indicate zipcodes, which include all the vendors present in that zipcode. If there are vendors in the same zipcode with a different trade relation, they are given a separate point (by modifying the latitude and longitude values very slightly). This prevents occlusion if many vendors are added (grouped by zipcode- at most two points per zipcode). This also enables the points to be color coded based on trade relationship status. The user can highlight one or many points by clicking and dragging over them. This provides details on demand, displaying a table beside the map (but only the rows for the points that have been selected) which shows each point's zip code and the food produced by the vendor located there.
 
     <p><strong><u>UI Walk-through</u></strong></p>
     The user may interact with any visualization to start with. For the line chart, the user may hover over the lines to get the exact quantities produced at specific points. The user can select a line (with trade relation, for example) to highlight (by increasing opacity) all the points on the map and corresponding bar with the same trade relation status. The bar chart has similar functionality, as this linking goes both ways. For the map, the user can brush a section of points to get more information about them in a chart next to the map (zipcode, food types produced, and trade relationship status). By brushing over those points the user will also highlight all the data with the corresponding trade relationships in the other 2 visualizations. For example, if you brush over data without a trade relationship in the map, the data in the other visualizations without a trade relationship with also be highlighted. If you brush over data with and without a trade relationship in the map, the data in the other visualizations with and without a trade relationship with also be highlighted.
     <p><strong>Default Visualization</strong></p>
-    <img src="/images/defaultVis.png" alt="Default Visualization">
+    <img src="images/defaultVis.png" alt="Default Visualization">
 
      <p><strong>Hovering over a point on line chart</strong></p>
-    <img src="/images/hoveringPoint.png" alt="Hovering over a point on line chart">
+    <img src="images/hoveringPoint.png" alt="Hovering over a point on line chart">
 
      <p><strong>Selecting a bar with no trade relationship</strong></p>
-    <img src="/images/selectBar.png" alt="Selecting a bar with no trade relationship">
+    <img src="images/selectBar.png" alt="Selecting a bar with no trade relationship">
 
      <p><strong>Selecting a line with trade relationship</strong></p>
-    <img src="/images/selectLine.png" alt="Selecting a line with trade relationship">
+    <img src="images/selectLine.png" alt="Selecting a line with trade relationship">
 
      <p><strong>Selecting multiple zipcode</strong></p>
-    <img src="/images/selectZipcode.png" alt="Selecting a zipcode">
+    <img src="images/selectZipcode.png" alt="Selecting a zipcode">
     <p>Note: Brush does not appear in screenshot.</p>
 
 
@@ -329,8 +329,8 @@
 
     <p>We actually made a change to visualization 3's design, by including a map to show zip codes and increase interactivity. This decision proved to make our visualization appealing in useability testing.</p>
     <p>We wanted our visualization to encourage potential buyers to attend the Trade Show, and are browsing the website to see if the trade show is a productive use of their time. Our visualization draws three conclusions by summarizing survey data: desire of vendors to find new trade partners and make larger wholesalers, volume that vendors can produce at the moment, and a map of containing vendor’s zip codes. Connecting these three ideas will encourage potential buyers visiting the website to join the trade show, where finding new partners will be very efficient.</p>
-    
-    
+
+
     <p><b>Usability Test Results</b></p>
     <p>We tested five tasks on multiple classmates in a visualization usability test. They found that the line chart points should disctint, so it can be recognized as an interaction. It is easy to tell the difference between vendors with or without a trade relationship and their capacity to produce food. This is due to the fact that brushing and linking between the map and the charts is very simple.</p>
     <table style="width:100%">
@@ -338,14 +338,24 @@
         <th>Based on these notes, we decided to:</th>
       </tr>
       <tr>
-        <td>Reorientate charts and map to be stacked on top of eachother</td>
+        <td> Make legend clearer</td>
       </tr>
       <tr>
-        <td>Describe what having a trade relation means</td>
+        <td>Add points to the line-chart to indicate interactivity</td>
       </tr>
       <tr>
-        <td>In the write up, justify our use of brushing and linking</td>
+        <td>Give visualizations titles</td>
       </tr>
+      <tr>
+        <td>Make sure titles, for visualizations, axes, etc., are clear and concise for a normal person</td>
+      </tr>
+      <tr>
+        <td>Instead of having all the graphs lined up next to each other order them to make it more intuitive for the user</td>
+      </tr>
+      <tr>
+        <td>Be able to provide information on more than 1 farm at a time for the map visualization</td>
+      </tr>
+    </table>
 
 
     <h1>Conclusion</h1>
