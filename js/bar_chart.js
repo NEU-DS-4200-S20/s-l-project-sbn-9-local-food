@@ -35,7 +35,7 @@ function barchart() {
 
 
      xScale
-      .domain(["Yes", "No"])
+      .domain(["yes", "no"])
       .rangeRound([0, width])
       .padding(0.05);
 
@@ -74,6 +74,9 @@ function barchart() {
       .attr("fill", function(d, i) {
         return color[i];
       })
+      .attr("id", function(d) {
+        return d.relation;
+      })
       .style("opacity", 0.5)
       .attr("x", function(d) { return xScale(d.relation); })
       .attr("width", xScale.bandwidth())
@@ -84,15 +87,34 @@ function barchart() {
       })
       .on('mousedown', function() {
         //console.log(d3.select(this))
-        const selection = d3.select(this).attr("class", "barSelected")
+        //const selection = d3.select(this).attr("class", "barSelected")
+       d3.select("#map").selectAll("#yes")
+          .style("fill", "blue")
+      d3.select("#map").selectAll("#no")
+          .style("fill", "green")
+
+
+       d3.select("#linechart").selectAll("#yes")
+          .style("stroke", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#linechart").selectAll("#no")
+          .style("stroke", "green")
+          .style("opacity", 0.5);
+
+       d3.select("#map").selectAll("#" + this.id)
+          .style("fill", "#FF0000")
+
+       d3.select("#linechart").selectAll("#" + this.id)
+          .style("fill", "#FF0000");
       }).
       on('mouseup', function() {
 
-      let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-      dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()[0]["relation"]);
+    //  let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+     // dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()[0]["relation"]);
       })
       .on('mouseout', function() {
-        const selection = d3.select(this).style("opacity", 0.5)
+         const selection = d3.select(this).style("opacity", 0.5)
     });
 
       svg.selectAll("text.bar")
@@ -100,7 +122,10 @@ function barchart() {
       .enter().append("text")
       .attr("class", "bar")
       .attr("text-anchor", "middle")
-      .attr("x", function(d) { return xScale(d.relation) + (width/4); })
+      .attr("x", function(d) { 
+        console.log(d.relation)
+        return xScale(d.relation) + (width/4);
+         })
       .attr("y", function(d) { return yScale(d.percent) - 5; })
       .text(function(d) { return d.percent.toFixed(0) + "%"; });
 
@@ -182,7 +207,7 @@ function barchart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    console.log(selectedData)
+    //console.log(selectedData)
 
     // Select an element if its datum was selected
     selectableElements.classed("barSelected", d => {

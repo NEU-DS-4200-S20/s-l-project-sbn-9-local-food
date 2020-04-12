@@ -123,7 +123,27 @@ function linechart() {
     on('mousedown', function() {
       const selection = d3.select(this).attr("class", "lineSelected")
       //d3.selectAll('circle').selectAll("#yes").style("fill", "#FF0000")
-      d3.select("#map").selectAll("#yes").style("fill", "#FF0000")
+
+      d3.select("#map").selectAll("#yes")
+          .style("fill", "blue")
+      d3.select("#map").selectAll("#no")
+          .style("fill", "green")
+
+
+       d3.select("#barchart").selectAll("#yes")
+          .style("stroke", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#barchart").selectAll("#no")
+          .style("stroke", "green")
+          .style("opacity", 0.5);
+
+
+
+
+      d3.select("#map").selectAll("#" + this.id).style("fill", "#FF0000")
+      d3.select("#barchart").selectAll("#" + this.id).style("fill", "#FF0000");
+
 
     }).
     on('mouseup', function() {

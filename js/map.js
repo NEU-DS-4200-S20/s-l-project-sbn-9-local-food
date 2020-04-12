@@ -175,10 +175,33 @@ function map(opts={}) {
         points.classed("selected", function(d) {
             //console.log(d);
             if(x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1) {
-              console.log(d)
+             //console.log(d)
               var id = d.relation;
-              d3.selectAll('#No')
-                .style("stroke", "#000000")
+
+
+      d3.select("#barchart").selectAll("#yes")
+          .style("stroke", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#barchart").selectAll("#no")
+          .style("stroke", "green")
+          .style("opacity", 0.5);
+
+
+         d3.select("#linechart").selectAll("#yes")
+            .style("stroke", "blue")
+            .style("opacity", 0.5);
+
+         d3.select("#linechart").selectAll("#no")
+            .style("stroke", "green")
+            .style("opacity", 0.5);
+
+
+
+              d3.select("#linechart").selectAll("#" + id).style("fill", "#FF0000");
+              d3.select("#barchart").selectAll("#" + id).style("fill", "#FF0000");
+
+
             }
             return x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
 
@@ -189,11 +212,11 @@ function map(opts={}) {
         )
 
         // Get the name of our dispatcher's event
-        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+       /* let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
 
         if (svg.selectAll(".selected").data().length !== 0) {
           dispatcher.call(dispatchString, this, svg.selectAll(".selected").data()[0]['relation']);
-        }
+        }*/
       }
 
       function brushEnd(){
