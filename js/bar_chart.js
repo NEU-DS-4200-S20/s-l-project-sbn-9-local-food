@@ -34,7 +34,7 @@ function barchart() {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-     xScale 
+     xScale
       .domain(["Yes", "No"])
       .rangeRound([0, width])
       .padding(0.05);
@@ -46,12 +46,12 @@ function barchart() {
       .attr("class", "axis")
       .attr("transform", "translate(0, " + (height) + ")")
       .call(d3.axisBottom(xScale))
-      .append("text")        
+      .append("text")
         .attr("transform", "translate(" + (width / 2) + ",40)")
       .attr("class", "axis_label")
       .text(xLabelText);
 
-  
+
     // Y axis and label
     let yAxis = svg.append("g")
       .attr("class", "axis")
@@ -88,9 +88,7 @@ function barchart() {
       on('mouseup', function() {
 
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-      dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()["relation"]);
-
-          console.log(svg.selectAll(".barSelected").data()["relation"])
+      dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()[0]["relation"]);
       })
       .on('mouseout', function() {
         const selection = d3.select(this).style("opacity", 0.5)
@@ -105,7 +103,9 @@ function barchart() {
       .attr("y", function(d) { return yScale(d.percent) - 5; })
       .text(function(d) { return d.percent.toFixed(0) + "%"; });
 
+      const bars = svg.selectAll(".bar")
 
+      selectableElements = bars
 
 
 
@@ -181,10 +181,12 @@ function barchart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-
+    //console.log(selectedData);
     // Select an element if its datum was selected
-    selectableElements.classed("selected", d => {
-      return selectedData.includes(d)
+    selectableElements.classed("barSelected", d => {
+      if (d['relation'] == selectedData) {
+        d.attr("class", "barSelected");
+      }
     });
   };
 

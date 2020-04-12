@@ -28,7 +28,7 @@ function map(opts={}) {
 
 
 
-  // Create the chart by adding an svg to the div with the id 
+  // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
   function chart(selector, data) {
 
@@ -94,9 +94,9 @@ function map(opts={}) {
     let points = svg.append("g")
       .selectAll(".scatterPoint")
       .data(data);
-   
-        
-    
+
+
+
     points.exit().remove();
 
 
@@ -134,22 +134,19 @@ function map(opts={}) {
         }
       })
        .attr("opacity", 0.7);
-     //  .on("mouseover", mouseover)
-     //  .on("mousemove", mousemove)
-     //  .on("mouseleave", mouseleave);    
 
 
 
 
-    
+
+
     selectableElements = points;
      svg.call(brush);
 
-   
+
 
     // Highlight points when brushed
     function brush(g) {
-      console.log("BRUSH");
 
       const brush = d3.brush() // Create a 2D interactive brush
         .on("start brush", highlight) // When the brush starts/continues do...
@@ -158,14 +155,13 @@ function map(opts={}) {
           [-margin.left, -margin.bottom],
           [width + margin.right, height + margin.top]
         ]);
-        
+
       ourBrush = brush;
 
       g.call(brush); // Adds the brush to this element
 
       // Highlight the selected circles
       function highlight() {
-        console.log("HIT highlight");
         if (d3.event.selection === null) return;
         const [
           [x0, y0],
@@ -174,7 +170,7 @@ function map(opts={}) {
 
         // If within the bounds of the brush, select it
         points.classed("selected", d =>
-             
+
           x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
 
         )
@@ -182,10 +178,11 @@ function map(opts={}) {
         // Get the name of our dispatcher's event
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
 
-        // Let other charts know about our selection
-        dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
+        if (svg.selectAll(".selected").data().length !== 0) {
+          dispatcher.call(dispatchString, this, svg.selectAll(".selected").data()[0]['relation']);
+        }
       }
-      
+
       function brushEnd(){
 
          if (!d3.event.selection) return;
@@ -208,7 +205,7 @@ function map(opts={}) {
         if(d3.event.sourceEvent.type!="end"){
 
           d3.select(this).call(brush.move, null);
-        }         
+        }
       }
 
 
@@ -230,8 +227,8 @@ function map(opts={}) {
 
             showTableColNames();
 
-            var d_row_filter = [d_row.zipcode, 
-                               d_row.food, 
+            var d_row_filter = [d_row.zipcode,
+                               d_row.food,
                                 d_row.relation];
 
             d3.select("table")
@@ -318,16 +315,16 @@ function map(opts={}) {
     return chart;
   };
 
-  // Given selected data from another visualization 
+  // Given selected data from another visualization
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-
+    //console.log(selectedData);
     // Select an element if its datum was selected
     selectableElements.classed("selected", d => {
-    console.log(d);
-
-      return selectedData.includes(d)
+      if (d['relation'] == selectedData) {
+        d.attr("class", "selected");
+      }
     });
 
   };
