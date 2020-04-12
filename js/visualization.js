@@ -3,7 +3,7 @@
 let data_relation = [];
 let data_norelation = [];
 let relations1 = ["Trade relation", "No trade relation"];
-let relations2 = ["Yes", "No"];
+let relations2 = ["yes", "no"];
 
 let map_data = [];
 let barchart_data = [];

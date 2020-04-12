@@ -42,6 +42,13 @@ function linechart() {
       .style("opacity", 0)
       .style("position", "absolute");
 
+    svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", (margin.top /4))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("font-weight", "bold")  
+        .text("Food Produced by Vendors in Each Season")
 
     //Define scales
     xScale
@@ -105,7 +112,11 @@ function linechart() {
       lines.append("path")
       .attr("class", ids)
       .attr("d", function(d) {
-        return line(d.values)});
+        //console.log(d);
+        return line(d.values)})
+      .attr("id", function(d) {
+        return d.id;
+      });
 
 <<<<<<< HEAD
       console.log(lines)
@@ -122,9 +133,44 @@ function linechart() {
     }).
     on('mousedown', function() {
       const selection = d3.select(this).attr("class", "lineSelected")
+      //d3.selectAll('circle').selectAll("#yes").style("fill", "#FF0000")
+
+      d3.select("#map").selectAll("#yes")
+          .style("fill", "blue")
+      d3.select("#map").selectAll("#no")
+          .style("fill", "green")
+
+      d3.select("#linechart").selectAll("#yes")
+          .style("stroke", "blue")
+          .style("opacity", 0.5);
+       d3.select("#linechart").selectAll("#no")
+          .style("stroke", "green")
+          .style("opacity", 0.5);
+
+
+       d3.select("#barchart").selectAll("#yes")
+          .style("fill", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#barchart").selectAll("#no")
+          .style("fill", "green")
+          .style("opacity", 0.5);
+
+
+
+      d3.select("#map").selectAll("#" + this.id).style("fill", "#FF0000")
+      
+      d3.select("#barchart").selectAll("#" + this.id)
+        .style("fill", "FF0000");
+
+      d3.select("#linechart").selectAll("#" + this.id)
+          .style("stroke", "#FF0000");
+
+
     }).
     on('mouseup', function() {
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+<<<<<<< HEAD
 <<<<<<< HEAD
       dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()["id"]);
 
@@ -132,6 +178,9 @@ function linechart() {
 =======
       dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()[0]['id']);
 >>>>>>> 88502908492a400e3c9709444888b7b45ea856fc
+=======
+     // dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()[0]['id']);
+>>>>>>> d9fc8fb8c5554447d9af1bcb512909437c45515d
     })
     .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
@@ -144,8 +193,9 @@ function linechart() {
     .append("circle")
     .attr("cx", function(d) { return xScale(d.season); })
     .attr("cy", function(d) { return yScale(d.pallets); })
-    .attr("r", 0)
+    .attr("r", 8)
     .attr("class","point")
+
 
     lines.selectAll("circles")
     .data(function(d) { return(d.values); } )
@@ -247,7 +297,7 @@ function linechart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    console.log(selectedData)
+    //console.log(selectedData)
 
 <<<<<<< HEAD
      selectableElements.classed("selected", d => {
@@ -257,7 +307,7 @@ function linechart() {
 
     selectableElements.classed("barSelected", d => {
       if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-        console.log(d)
+       // console.log(d)
         return selectedData.includes(d)
       }
 >>>>>>> 88502908492a400e3c9709444888b7b45ea856fc

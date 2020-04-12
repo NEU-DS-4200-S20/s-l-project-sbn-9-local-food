@@ -120,6 +120,9 @@ function map(opts={}) {
       .append("circle")
       .attr("class", "")
       .merge(points)
+      .attr("id", (d) => {
+        return d.relation
+      })
       .attr("cx", X)
       .attr("cy", Y)
       .attr("r", (d) => { return 5; })
@@ -169,14 +172,54 @@ function map(opts={}) {
         ] = d3.event.selection;
 
         // If within the bounds of the brush, select it
-        points.classed("selected", d =>
+        points.classed("selected", function(d) {
+            //console.log(d);
+            if(x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1) {
+             //console.log(d)
+              var id = d.relation;
 
-          x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
+              d3.select("#map").selectAll("#yes")
+          .style("fill", "blue")
+      d3.select("#map").selectAll("#no")
+          .style("fill", "green")
+
+
+      d3.select("#barchart").selectAll("#yes")
+          .style("fill", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#barchart").selectAll("#no")
+          .style("fill", "green")
+          .style("opacity", 0.5);
+
+
+         d3.select("#linechart").selectAll("#yes")
+            .style("stroke", "blue")
+            .style("opacity", 0.5);
+
+         d3.select("#linechart").selectAll("#no")
+            .style("stroke", "green")
+            .style("opacity", 0.5);
+
+        d3.select("#map").selectAll("#" + this.id)
+          .style("fill", "#FF0000")
+
+
+              d3.select("#linechart").selectAll("#" + id).style("stroke", "#FF0000");
+              d3.select("#barchart").selectAll("#" + id).style("fill", "#FF0000");
+
+
+            }
+            return x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
+
+
+        }
+
 
         )
 
         // Get the name of our dispatcher's event
-        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+       /* let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
 
 <<<<<<< HEAD
         // Let other charts know about our selection
@@ -184,8 +227,12 @@ function map(opts={}) {
 =======
         if (svg.selectAll(".selected").data().length !== 0) {
           dispatcher.call(dispatchString, this, svg.selectAll(".selected").data()[0]['relation']);
+<<<<<<< HEAD
         }
 >>>>>>> 88502908492a400e3c9709444888b7b45ea856fc
+=======
+        }*/
+>>>>>>> d9fc8fb8c5554447d9af1bcb512909437c45515d
       }
 
       function brushEnd(){
@@ -324,7 +371,7 @@ function map(opts={}) {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    console.log(selectedData);
+   //console.log(selectedData);
     // Select an element if its datum was selected
 <<<<<<< HEAD
     selectableElements.classed("selected", d => {
@@ -334,7 +381,7 @@ function map(opts={}) {
 
     selectableElements.classed("selected", d => {
       if (d['relation'] == selectedData.toLowerCase()) {
-        console.log(d)
+       //console.log(d)
         return selectedData.includes(d)
       }
     });

@@ -50,21 +50,23 @@
   <div class="vis-holder">
     <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
+
+    <div class="linechart-holder" id="linechart"></div>
+    <div class="barchart-holder" id="barchart"></div>
     <div class="legend-holder" id="legend">
 
       <div class='my-legend'>
       <div class='legend-title'>Legend</div>
       <div class='legend-scale'>
         <ul class='legend-labels'>
-          <li><span style='background:#0000ff;'></span>Has Trade Relation</li>
-          <li><span style='background:#008000;'></span>No Trade Relation</li>
+          <li><span style='background:#0000ff;'></span>Vendor Has Trade Relation With Buyer</li>
+          <li><span style='background:#008000;'></span>Vendor Does Not Have Trade Relation With Buyer</li>
+          <li><span style='background:#ff0000; opacity: 0.5'></span>Selected data</li>
         </ul>
       </div>
       </div>
 
     </div>
-    <div class="linechart-holder" id="linechart"></div>
-    <div class="barchart-holder" id="barchart"></div>
     <div class="map-holder" id="map"></div>
     <div id="table">
         <table>
@@ -330,11 +332,26 @@
     <p>The visualization we decided to implement was visualization 6 (see above). This visualization is actually not one of our three top choices from Project Assignment 4. After further critical examination of our visualizations this week, we decided that despite this, visualization 3 is just as informative as our top picks, while also being more straightforward to both implement and understand. Additionally, the data availability was too limited to implement our top designs, whereas visualization 3 uses data that has already been provided. Because of this, we decided to choose visualization 3 over visualizations 2, 4, and 5, which were our original top three picks.</p>
 
     <p>We wanted our visualization to encourage potential buyers to attend the Trade Show, and are browsing the website to see if the trade show is a productive use of their time. Our visualization draws three conclusions by summarizing survey data: desire of vendors to find new trade partners and make larger wholesalers, volume that vendors can produce at the moment, and a map of containing vendor’s zip codes. Connecting these three ideas will encourage potential buyers visiting the website to join the trade show, where finding new partners will be very efficient.</p>
+    <p><b>Usability Test Results</b></p>
+    <p>We tested five tasks on multiple classmates in a visualization usability test. They found that the line chart points should disctint, so it can be recognized as an interaction. It is easy to tell the difference between vendors with or without a trade relationship and their capacity to produce food. This is due to the fact that brushing and linking between the map and the charts is very simple.</p>
+    <table style="width:100%">
+      <tr>
+        <th>Based on these notes, we decided to:</th>
+      </tr>
+      <tr>
+        <td>Reorientate charts and map to be stacked on top of eachother</td>
+      </tr>
+      <tr>
+        <td>Describe what having a trade relation means</td>
+      </tr>
+      <tr>
+        <td>In the write up, justify our use of brushing and linking</td>
+      </tr>
 
 
     <h1>Conclusion</h1>
 
-    <p><em>This project allows SBN to refer to an online visualization to aid buyers in determining whether it is worth their while to attend he Local Foods Trade Show. Our visualization tells a story of vendor's desires to increase wholesale production as well as the capcity to do so. The products produced are available in the details on demand through the map, and the mission of SBN to support local food consumption is highlighted there as well. We accomplished these tasks by cleaning survey data, aggregating infomration in to usful bins like vendor capacity to produce crops during the winter, and cerating visualizations that encourages the user to explore the connection between vednors with or without a trade relationship. </em></p>
+    <p><em>This project allows SBN to refer to an online visualization to aid buyers in determining whether it is worth their while to attend the Local Foods Trade Show. Our visualization tells a story of vendor's desires to increase wholesale production as well as the capcity to do so. The products produced are available in the details on demand through the map, and the mission of SBN to support local food consumption is highlighted there as well. We accomplished these tasks by cleaning survey data, aggregating infomration in to usful bins like vendor capacity to produce crops during the winter, and cerating visualizations that encourages the user to explore the connection between vednors with or without a trade relationship. </em></p>
 
     <p><em>Due to the annonymity of our dataset, the group was limited in our ability to link urls and more detailed vendor information. We recommend that SBN continue surveying its trade show participants with identifying informtation and for the next group of data scientists to incorporate more interactivity with this increase of information.</em></p>
 
@@ -349,6 +366,9 @@
       <li><a href="http://datawanderings.com/2019/11/01/tutorial-making-an-interactive-line-chart-in-d3-js-v-5/">TUTORIAL: Making an Interactive Line Chart in D3.js v.5</a> by Eve the Analyst.</li>
       <li><a href="http://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/">TUTORIAL: Making a Line Chart in D3.js v.5</a> by Eve the Analyst.</li>
       <li><a href="http://bl.ocks.org/feyderm/6bdbc74236c27a843db633981ad22c1b">Scatter plot + Brush</a> by Michael Feyder.</li>
+      <li><a href="http://bl.ocks.org/AMDS/4a61497182b8fcb05906</li>
+      <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/</li>
+      <li><a href="http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html</li>
     </ul>
 
   </div>
