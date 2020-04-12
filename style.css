@@ -140,6 +140,8 @@ opacity: 0.8;
 
 .barchart-holder {
   flex: 0 0 40%;
+  flex-wrap: wrap;
+  align-self: flex-end;
 }
 
 .axis line{
