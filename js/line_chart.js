@@ -112,7 +112,11 @@ function linechart() {
       lines.append("path")
       .attr("class", ids)
       .attr("d", function(d) {
-        return line(d.values)});
+        //console.log(d);
+        return line(d.values)})
+      .attr("id", function(d) {
+        return d.id;
+      });
 
     selectableElements = lines;
 
@@ -125,10 +129,33 @@ function linechart() {
     }).
     on('mousedown', function() {
       const selection = d3.select(this).attr("class", "lineSelected")
+      //d3.selectAll('circle').selectAll("#yes").style("fill", "#FF0000")
+
+      d3.select("#map").selectAll("#yes")
+          .style("fill", "blue")
+      d3.select("#map").selectAll("#no")
+          .style("fill", "green")
+
+
+       d3.select("#barchart").selectAll("#yes")
+          .style("stroke", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#barchart").selectAll("#no")
+          .style("stroke", "green")
+          .style("opacity", 0.5);
+
+
+
+
+      d3.select("#map").selectAll("#" + this.id).style("fill", "#FF0000")
+      d3.select("#barchart").selectAll("#" + this.id).style("fill", "#FF0000");
+
+
     }).
     on('mouseup', function() {
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-      dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()[0]['id']);
+     // dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()[0]['id']);
     })
     .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
@@ -245,28 +272,15 @@ function linechart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData);
+    //console.log(selectedData)
 
-    console.log(selectableElements)
 
-    if (selectedData == "yes") {
-      console.log(selectableElements[0])
-      d3.select(selectableElements[0]).attr("class", "lineSelected")
-    } else {
-      console.log(selectableElements[1])
-      d3.select(selectableElements[1]).attr("class", "lineSelected")
-    }
-    //  selectableElements.classed("lineSelected", d => {
-    //    if (d['id'] == selectedData) {
-    //      d3.select(d).attr("class", "lineSelected");
-    //    }
-    // });
-
-    // selectableElements.forEach(d => {
-    //   if (d['id'] == selectedData) {
-    //         d3.select(d).attr("class", "lineSelected");
-    //      }
-    // })
+    selectableElements.classed("barSelected", d => {
+      if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
+       // console.log(d)
+        return selectedData.includes(d)
+      }
+    });
 
 
   };

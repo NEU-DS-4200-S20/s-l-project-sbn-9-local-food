@@ -84,6 +84,8 @@ h1, h2, h3 {
   justify-content: flex-start;
   display: flex;
   flex-wrap: wrap;
+  align-self: flex-end;
+  justify-content: flex-start;
 }
 
 .legend-holder {
@@ -271,3 +273,6 @@ fill: #D3D3D3;
   	fill: #FF00FF;
   }
 
+	.selected {
+		fill: #FF00FF;
+	}
