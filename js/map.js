@@ -319,13 +319,13 @@ function map(opts={}) {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData);
+    console.log(selectedData);
     // Select an element if its datum was selected
 
 
     selectableElements.classed("selected", d => {
       if (d['relation'] == selectedData.toLowerCase()) {
-        //console.log(d)
+        console.log(d)
         return selectedData.includes(d)
       }
     });

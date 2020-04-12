@@ -237,12 +237,12 @@ function linechart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData)
+    console.log(selectedData)
 
 
     selectableElements.classed("barSelected", d => {
       if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-        //console.log(d)
+        console.log(d)
         return selectedData.includes(d)
       }
     });

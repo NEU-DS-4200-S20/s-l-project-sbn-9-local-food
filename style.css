@@ -234,3 +234,6 @@ fill: #D3D3D3;
   	fill: #FF00FF;
   }
 
+	.selected {
+		fill: #FF00FF;
+	}
