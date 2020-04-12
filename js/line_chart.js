@@ -141,7 +141,7 @@ function linechart() {
     .append("circle")
     .attr("cx", function(d) { return xScale(d.season); })
     .attr("cy", function(d) { return yScale(d.pallets); })
-    .attr("r", 0)
+    .attr("r", 8)
     .attr("class","point")
 
     lines.selectAll("circles")
