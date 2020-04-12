@@ -42,6 +42,13 @@ function linechart() {
       .style("opacity", 0)
       .style("position", "absolute");
 
+    svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", (margin.top /4))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("font-weight", "bold")  
+        .text("Food Produced by Vendors in Each Season")
 
     //Define scales
     xScale
@@ -174,6 +181,7 @@ function linechart() {
     .attr("cy", function(d) { return yScale(d.pallets); })
     .attr("r", 8)
     .attr("class","point")
+
 
     lines.selectAll("circles")
     .data(function(d) { return(d.values); } )
