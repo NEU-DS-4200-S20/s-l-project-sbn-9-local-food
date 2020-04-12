@@ -32,7 +32,14 @@ function barchart() {
 
     svg = svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    
+    svg.append("text")
+      .attr("x", (width/2))             
+      .attr("y", (margin.top /4))
+      .attr("text-anchor", "middle")  
+      .style("font-size", "16px") 
+      .style("font-weight", "bold")  
+      .text("The Effect of a Trade Relation on Desired Wholsale")
 
      xScale
       .domain(["Yes", "No"])

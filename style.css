@@ -81,7 +81,9 @@ h1, h2, h3 {
 .vis-holder {
   width: 100%;
   height: 100%;
+  justify-content: flex-start;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .legend-holder {
@@ -92,12 +94,13 @@ h1, h2, h3 {
 	font-family: Georgia;
 	font-size: 80%;
 	flex: 0 0 10%;
-
+	flex-shrink: .1;
+	align-items: baseline;
 }
 .my-legend {
 	flex: inherit;
 	width: 100%;
-	height: 100%;
+	height: 00%;
 }
 
 .my-legend .legend-title {
@@ -131,13 +134,16 @@ border: 1px solid #999;
 opacity: 0.8;
 }
 
-
 .linechart-holder {
   flex: 0 0 40%;
+  flex-shrink: .1;
 }
+
 
 .barchart-holder {
   flex: 0 0 40%;
+  flex-wrap: wrap;
+  align-self: flex-end;
 }
 
 .axis line{
@@ -200,9 +206,40 @@ font-size: 60%;
 padding: 5px 20px 5px 5px;
 }
 
-table, th, td {
+table {
   border: 1px solid black;
   border-collapse: collapse;
+  max-width: 45%;
+  align-self: stretch;
+  flex: 0 0 10%;
+  flex-shrink: .1;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+	background: #eee; 
+}
+th { 
+	background: #333; 
+	color: white; 
+	font-weight: bold; 
+	cursor: s-resize;
+	background-repeat: no-repeat;
+	background-position: 3% center;
+}
+td, th { 
+	padding: 6px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	width: 50%;
+	align-self: stretch;
+}
+
+th.des:after {
+  content: "\21E9";
+}
+
+th.aes:after {
+  content: "\21E7";
 }
 
 .point {
