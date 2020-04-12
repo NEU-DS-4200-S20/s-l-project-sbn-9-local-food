@@ -178,13 +178,18 @@ function map(opts={}) {
              //console.log(d)
               var id = d.relation;
 
+              d3.select("#map").selectAll("#yes")
+          .style("fill", "blue")
+      d3.select("#map").selectAll("#no")
+          .style("fill", "green")
+
 
       d3.select("#barchart").selectAll("#yes")
-          .style("stroke", "blue")
+          .style("fill", "blue")
           .style("opacity", 0.5);
 
        d3.select("#barchart").selectAll("#no")
-          .style("stroke", "green")
+          .style("fill", "green")
           .style("opacity", 0.5);
 
 
@@ -196,9 +201,11 @@ function map(opts={}) {
             .style("stroke", "green")
             .style("opacity", 0.5);
 
+        d3.select("#map").selectAll("#" + this.id)
+          .style("fill", "#FF0000")
 
 
-              d3.select("#linechart").selectAll("#" + id).style("fill", "#FF0000");
+              d3.select("#linechart").selectAll("#" + id).style("stroke", "#FF0000");
               d3.select("#barchart").selectAll("#" + id).style("fill", "#FF0000");
 
 

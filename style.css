@@ -253,10 +253,7 @@ fill: #D3D3D3;
     shape-rendering: crispEdges
   }
 
-  .zipcode {
-  	fill: #2b2929;
-  }
-
+  
   .barSelected {
   	fill: #FF00FF;
   }
@@ -266,5 +263,6 @@ fill: #D3D3D3;
   }
 
 	.selected {
-		fill: #FF00FF;
+		fill: #FF0000;
+		opacity: 0.5;
 	}

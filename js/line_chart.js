@@ -129,20 +129,31 @@ function linechart() {
       d3.select("#map").selectAll("#no")
           .style("fill", "green")
 
-
-       d3.select("#barchart").selectAll("#yes")
+      d3.select("#linechart").selectAll("#yes")
           .style("stroke", "blue")
           .style("opacity", 0.5);
-
-       d3.select("#barchart").selectAll("#no")
+       d3.select("#linechart").selectAll("#no")
           .style("stroke", "green")
           .style("opacity", 0.5);
 
 
+       d3.select("#barchart").selectAll("#yes")
+          .style("fill", "blue")
+          .style("opacity", 0.5);
+
+       d3.select("#barchart").selectAll("#no")
+          .style("fill", "green")
+          .style("opacity", 0.5);
+
 
 
       d3.select("#map").selectAll("#" + this.id).style("fill", "#FF0000")
-      d3.select("#barchart").selectAll("#" + this.id).style("fill", "#FF0000");
+      
+      d3.select("#barchart").selectAll("#" + this.id)
+        .style("fill", "FF0000");
+
+      d3.select("#linechart").selectAll("#" + this.id)
+          .style("stroke", "#FF0000");
 
 
     }).
