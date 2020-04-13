@@ -32,13 +32,13 @@ function barchart() {
 
     svg = svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
     svg.append("text")
-      .attr("x", (width/2))             
+      .attr("x", (width/2))
       .attr("y", (margin.top /4))
-      .attr("text-anchor", "middle")  
-      .style("font-size", "16px") 
-      .style("font-weight", "bold")  
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
       .text("The Effect of a Trade Relation on Desired Wholsale")
 
      xScale
@@ -77,7 +77,6 @@ function barchart() {
   svg.selectAll(".bar")
     .data(data)
     .enter().append("rect")
-      //.attr("class", "bar")
       .attr("fill", function(d, i) {
         return color[i];
       })
@@ -89,10 +88,8 @@ function barchart() {
       .attr("width", xScale.bandwidth())
       .attr("y", function(d) { return yScale(d.percent); })
       .attr("height", function(d) { return height - yScale(d.percent); })
-     
+
       .on('mousedown', function() {
-        //console.log(d3.select(this))
-        //const selection = d3.select(this).attr("class", "barSelected")
        d3.select("#map").selectAll("#yes")
           .style("fill", "blue")
       d3.select("#map").selectAll("#no")
@@ -124,18 +121,15 @@ function barchart() {
           .style("stroke", "#FF0000");
       }).
       on('mouseup', function() {
-
-    //  let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-     // dispatcher.call(dispatchString, this, svg.selectAll(".barSelected").data()[0]["relation"]);
       });
-  
+
 
       svg.selectAll("text.bar")
       .data(data)
       .enter().append("text")
       .attr("class", "bar")
       .attr("text-anchor", "middle")
-      .attr("x", function(d) { 
+      .attr("x", function(d) {
         console.log(d.relation)
         return xScale(d.relation) + (width/4);
          })
@@ -220,12 +214,10 @@ function barchart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData)
 
     // Select an element if its datum was selected
     selectableElements.classed("barSelected", d => {
       if (d['relation'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-        //console.log(d)
         return selectedData.includes(d)
       }
     });

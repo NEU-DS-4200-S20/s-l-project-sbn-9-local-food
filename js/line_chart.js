@@ -121,8 +121,6 @@ function linechart() {
       const selection = d3.select(this).attr("class", "highlight_" + line_class.slice(-1))
     }).
     on('mousedown', function() {
-      //const selection = d3.select(this).attr("class", "lineSelected")
-      //d3.selectAll('circle').selectAll("#yes").style("fill", "#FF0000")
 
       d3.select("#map").selectAll("#yes")
           .style("fill", "blue")
@@ -148,7 +146,7 @@ function linechart() {
 
 
       d3.select("#map").selectAll("#" + this.id).style("fill", "#FF0000")
-      
+
       d3.select("#barchart").selectAll("#" + this.id)
         .style("fill", "FF0000");
 
@@ -275,12 +273,10 @@ function linechart() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    //console.log(selectedData)
 
 
     selectableElements.classed("barSelected", d => {
       if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-       // console.log(d)
         return selectedData.includes(d)
       }
     });

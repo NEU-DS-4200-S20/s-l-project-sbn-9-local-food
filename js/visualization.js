@@ -16,7 +16,7 @@ let map_relation = [];
 let map_norelation = [];
 
 
-((() => { 
+((() => {
 
 	d3.csv("data/data.csv", (data) => {
 
@@ -95,9 +95,6 @@ let map_norelation = [];
 		.x(d => d.longitude)
 		.y(d => d.latitude)
 		.selectionDispatcher(d3.dispatch(dispatchString))
-		// .r(d => d.relation)
-		// .f(d => d.food)
-		// .z(d => d.zipcode)
 		("#map", map_data);
 
 
@@ -126,13 +123,6 @@ let map_norelation = [];
 
 function formatMapData(data) {
 	map_data = parseMapData(data);
-	// let map_norelation = parseMapData(data_norelation);
-	//let map_unformatted = [map_relation, map_norelation];
-
-
-	// map_data.forEach(function(d) {
-	// 	console.log(d);
-	// })
 }
 
 
@@ -162,8 +152,6 @@ function parseMapData(data) {
   			newStr = newStr + vendorFood[i];
 		}
 
-		//tempArr.push(newStr); 
-
 		mapDict = {
 			latitude: latitude,
 			longitude: longitude,
@@ -175,18 +163,17 @@ function parseMapData(data) {
 		tempArr.push(mapDict);
 	});
 
-	
 
 
 
-	return tempArr; 
+
+	return tempArr;
 
 }
 
 function formatBarChartData() {
-	// parseBarChartData(data);
 	let bar_relation = parseBarChartData(data_relation);
-	let bar_norelation = parseBarChartData(data_norelation); 
+	let bar_norelation = parseBarChartData(data_norelation);
 	let barchart_unformatted = [bar_relation, bar_norelation]
 
 	relations2.forEach(function(r,i) {
@@ -202,11 +189,11 @@ function formatBarChartData() {
 function parseBarChartData(data) {
 	let desiredPercentChange = [];
 	let totalDifference = 0;
-	let count = 0; 
+	let count = 0;
 	let average;
 
 	data.forEach(function(row, i, arr) {
-		
+
 		let currentPercent = row["Approximately what percentage of your products do you currently sell wholesale?"];
 		let goalPercent = row["Do you have a goal for what percentage of your products you would like to sell wholesale?"];
 
@@ -232,7 +219,7 @@ function formatLineChartData() {
 			values: linechart_unformatted[i]
 		});
 	});
-} 
+}
 
 // Computes averages of vendors' production volume per season and formats data
 function parseLineChartData(data) {

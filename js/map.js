@@ -42,7 +42,6 @@ function map(opts={}) {
 
     let svg = d3.select(selector)
       .append("svg")
-        // .attr("width", "100%")
         .attr("width", width + "px")
         .attr("height", height + "px")
         .attr("preserveAspectRatio", "xMidYMid meet")
@@ -54,24 +53,10 @@ function map(opts={}) {
         .attr('xlink:href', opts['backgroundImage'])
         .attr("width", width)
         .attr("height", height)
-      // svg.attr('background-image', "url(" + opts['backgroundImage'] + ")");
     }
 
     svg = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-/*
-     let Tooltip = d3.select(selector)
-       .append("div")
-       .attr("class", "tooltip")
-       .style("min-height", "500px")
-       .style("opacity", 1)
-       .style("background-color", "white")
-       .style("border", "solid")
-       .style("border-width", "2px")
-       .style("border-radius", "5px")
-       .style("padding", "5px")*/
 
     //Define scales
     xScale
@@ -98,23 +83,6 @@ function map(opts={}) {
 
 
     points.exit().remove();
-
-
-/*
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function(d) {
-      console.log("HIT")
-      Tooltip.style("opacity", 1)
-    }
-    var addTooltip = function(d) {
-       Tooltip
-         .html("Zipcode: " + d.zipcode + "<br>" + "Food Types Produced: " + d.food)
-         .style("left", (d3.mouse(this)[0]+10) + "px")
-         .style("top", (d3.mouse(this)[1]) + "px")
-    }
-    var mouseleave = function(d) {
-      Tooltip.style("opacity", 0)
-    }*/
 
     points = points.enter()
       .append("circle")
@@ -173,9 +141,7 @@ function map(opts={}) {
 
         // If within the bounds of the brush, select it
         points.classed("selected", function(d) {
-            //console.log(d);
             if(x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1) {
-             //console.log(d)
               var id = d.relation;
 
               d3.select("#map").selectAll("#yes")
@@ -219,12 +185,6 @@ function map(opts={}) {
 
         )
 
-        // Get the name of our dispatcher's event
-       /* let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-
-        if (svg.selectAll(".selected").data().length !== 0) {
-          dispatcher.call(dispatchString, this, svg.selectAll(".selected").data()[0]['relation']);
-        }*/
       }
 
       function brushEnd(){
@@ -363,13 +323,11 @@ function map(opts={}) {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-   //console.log(selectedData);
     // Select an element if its datum was selected
 
 
     selectableElements.classed("selected", d => {
       if (d['relation'] == selectedData.toLowerCase()) {
-       //console.log(d)
         return selectedData.includes(d)
       }
     });
