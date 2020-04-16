@@ -15,6 +15,28 @@ let line_norelation = [];
 let map_relation = [];
 let map_norelation = [];
 
+function deselectAll() {
+	d3.select("#map").selectAll("#yes")
+			.style("fill", "blue")
+	d3.select("#map").selectAll("#no")
+			.style("fill", "green")
+
+	d3.select("#linechart").selectAll("#yes")
+			.style("stroke", "blue")
+			.style("opacity", 0.5);
+	 d3.select("#linechart").selectAll("#no")
+			.style("stroke", "green")
+			.style("opacity", 0.5);
+
+
+	 d3.select("#barchart").selectAll("#yes")
+			.style("fill", "blue")
+			.style("opacity", 0.5);
+
+	 d3.select("#barchart").selectAll("#no")
+			.style("fill", "green")
+			.style("opacity", 0.5);
+}
 
 ((() => {
 

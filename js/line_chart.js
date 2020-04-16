@@ -36,6 +36,14 @@ function linechart() {
     svg = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  svg.append("text") 
+  .attr("x", (width/2))       
+  .attr("y", (margin.top /4)) 
+  .attr("text-anchor", "middle")   
+  .style("font-size", "16px")  
+  .style("font-weight", "bold")   
+  .text("Average Pallets Produced by Vendors Each Season")
+
     // Create an area around points to ease selection of data via mouse hover
     const tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")

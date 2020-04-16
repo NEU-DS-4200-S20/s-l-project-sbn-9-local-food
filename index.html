@@ -46,6 +46,11 @@
 
   </div>
 
+  <div class='instruction'><p>To interact, hover over points on the line chart, select a line or bar, brush over points on the map, and to deselect all press the button labeled 'Deselect All'.</p></div>
+
+  <div class="deselectAll"> 
+    <button id='deselect' onclick="deselectAll()">Deselect All</button> 
+  </div>
   <!-- Your visualization here -->
   <div class="vis-holder">
     <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
@@ -68,6 +73,7 @@
 
     </div>
     <div class="map-holder" id="map"></div>
+
     <div id="table">
         <table>
             <tr>
@@ -77,7 +83,6 @@
             </tr>
         </table>
     </div>
-
 
   </div>
 
@@ -109,7 +114,7 @@
     The points indicate zipcodes, which include all the vendors present in that zipcode. If there are vendors in the same zipcode with a different trade relation, they are given a separate point (by modifying the latitude and longitude values very slightly). This prevents occlusion if many vendors are added (grouped by zipcode- at most two points per zipcode). This also enables the points to be color coded based on trade relationship status. The user can highlight one or many points by clicking and dragging over them. This provides details on demand, displaying a table beside the map (but only the rows for the points that have been selected) which shows each point's zip code and the food produced by the vendor located there.
 
     <p><strong><u>UI Walk-through</u></strong></p>
-    The user may interact with any visualization to start with. For the line chart, the user may hover over the lines to get the exact quantities produced at specific points. The user can select a line (with trade relation, for example) to highlight (by increasing opacity) all the points on the map and corresponding bar with the same trade relation status. The bar chart has similar functionality, as this linking goes both ways. For the map, the user can brush a section of points to get more information about them in a chart next to the map (zipcode, food types produced, and trade relationship status). By brushing over those points the user will also highlight all the data with the corresponding trade relationships in the other 2 visualizations. For example, if you brush over data without a trade relationship in the map, the data in the other visualizations without a trade relationship with also be highlighted. If you brush over data with and without a trade relationship in the map, the data in the other visualizations with and without a trade relationship with also be highlighted.
+    The user may interact with any visualization to start with. For the line chart, the user may hover over the lines to get the exact quantities produced at specific points. The user can select a line (with trade relation, for example) to highlight (by increasing opacity) all the points on the map and corresponding bar with the same trade relation status. The bar chart has similar functionality, as this linking goes both ways. For the map, the user can brush a section of points to get more information about them in a chart next to the map (zipcode, food types produced, and trade relationship status). By brushing over those points the user will also highlight all the data with the corresponding trade relationships in the other 2 visualizations. For example, if you brush over data without a trade relationship in the map, the data in the other visualizations without a trade relationship with also be highlighted. If you brush over data with and without a trade relationship in the map, the data in the other visualizations with and without a trade relationship with also be highlighted. To deselect all data click the button labeled 'Deselect All.'
     <p><strong>Default Visualization</strong></p>
     <img src="images/defaultvis.png" alt="Default Visualization">
 
