@@ -39,7 +39,7 @@ function barchart() {
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
       .style("font-weight", "bold")
-      .text("The Effect of a Trade Relation on Desired Wholsale")
+      .text("Effect of Trade Relation on Desired Wholesale")
 
      xScale
       .domain(["yes", "no"])

@@ -10,6 +10,7 @@
 
   <!-- CSS Styling -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -49,7 +50,7 @@
   <div class='instruction'><p>To interact, hover over points on the line chart, select a line or bar, brush over points on the map, and to deselect all press the button labeled 'Deselect All'.</p></div>
 
   <div class="deselectAll"> 
-    <button id='deselect' onclick="deselectAll()">Deselect All</button> 
+    <button class="btn btn-info btn-sm" id='deselect' onclick="deselectAll()">Deselect All</button> 
   </div>
   <!-- Your visualization here -->
   <div class="vis-holder">
@@ -72,17 +73,23 @@
       </div>
 
     </div>
-    <div class="map-holder" id="map"></div>
+    <div class='map-table'>
+       <div class="map">
+      <div class="map-holder" id="map"></div>
 
-    <div id="table">
-        <table>
-            <tr>
-                <th>Zipcode</th>
-                <th>Food Types Produced</th>
-                <th>Trade Relation Status</th>
-            </tr>
-        </table>
     </div>
+    <div class="table-holder" id="table">
+          <table>
+              <tr>
+                  <th>Zipcode</th>
+                  <th>Food Types Produced</th>
+                  <th>Trade Relation Status</th>
+              </tr>
+          </table>
+      </div>
+    </div>
+   
+      
 
   </div>
 
