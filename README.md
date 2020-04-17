@@ -8,7 +8,7 @@
 **Partner:** SBN
 
 
-##Technology
+## Technology
 D3.js, CSS, HTML
 
 ## The GitHub Pages Website
