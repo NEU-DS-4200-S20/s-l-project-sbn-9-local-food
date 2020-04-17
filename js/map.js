@@ -1,19 +1,17 @@
 /* global D3 */
 
-// Initialize a spatial plot with an image background. Modeled after Mike Bostock's
-// Reusable Chart framework https://bost.ocks.org/mike/chart/
+
 function map(opts={}) {
 
-  // Based on Mike Bostock's margin convention
-  // https://bl.ocks.org/mbostock/3019563
+
   let margin = {
       top: 0,
       left: 0,
       right: 0,
       bottom: 0
     },
-    width = 433, // change this to the screenshot's width
-    height = 537, // change this to the screenshot's height
+    width = 433,
+    height = 537, 
     xValue = d => d[0],
     yValue = d => d[1],
     xLabelText = "",
@@ -21,7 +19,6 @@ function map(opts={}) {
     yLabelOffsetPx = 0,
     xScale = d3.scaleLinear(),
     yScale = d3.scaleLinear(),
-    //rScale = d3.scaleLinear(),
     ourBrush = null,
     selectableElements = d3.select(null),
     dispatcher;
@@ -106,15 +103,8 @@ function map(opts={}) {
       })
        .attr("opacity", 0.7);
 
-
-
-
-
-
     selectableElements = points;
      svg.call(brush);
-
-
 
     // Highlight points when brushed
     function brush(g) {
@@ -144,44 +134,41 @@ function map(opts={}) {
             if(x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1) {
               var id = d.relation;
 
-              d3.select("#map").selectAll("#yes")
-          .style("fill", "blue")
-      d3.select("#map").selectAll("#no")
-          .style("fill", "green")
+            d3.select("#map").selectAll("#yes")
+                .style("fill", "blue")
+            d3.select("#map").selectAll("#no")
+                .style("fill", "green")
 
 
-      d3.select("#barchart").selectAll("#yes")
-          .style("fill", "blue")
-          .style("opacity", 0.5);
+            d3.select("#barchart").selectAll("#yes")
+                .style("fill", "blue")
+                .style("opacity", 0.5);
 
-       d3.select("#barchart").selectAll("#no")
-          .style("fill", "green")
-          .style("opacity", 0.5);
-
-
-         d3.select("#linechart").selectAll("#yes")
-            .style("stroke", "blue")
-            .style("opacity", 0.5);
-
-         d3.select("#linechart").selectAll("#no")
-            .style("stroke", "green")
-            .style("opacity", 0.5);
-
-        d3.select("#map").selectAll("#" + this.id)
-          .style("fill", "#FF0000")
-          .style("opacity", 1)
+             d3.select("#barchart").selectAll("#no")
+                .style("fill", "green")
+                .style("opacity", 0.5);
 
 
-              d3.select("#linechart").selectAll("#" + id).style("stroke", "#FF0000");
-              d3.select("#barchart").selectAll("#" + id).style("fill", "#FF0000");
+             d3.select("#linechart").selectAll("#yes")
+                .style("stroke", "blue")
+                .style("opacity", 0.5);
+
+             d3.select("#linechart").selectAll("#no")
+                .style("stroke", "green")
+                .style("opacity", 0.5);
+
+             d3.select("#map").selectAll("#" + this.id)
+                .style("fill", "#FF0000")
+                .style("opacity", 1)
+
+
+            d3.select("#linechart").selectAll("#" + id).style("stroke", "#FF0000");
+            d3.select("#barchart").selectAll("#" + id).style("fill", "#FF0000");
 
 
             }
             return x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
-
-
         }
-
 
         )
 
@@ -312,27 +299,6 @@ function map(opts={}) {
     return chart;
   };
 
-  // Gets or sets the dispatcher we use for selection events
-  chart.selectionDispatcher = function (_) {
-    if (!arguments.length) return dispatcher;
-    dispatcher = _;
-    return chart;
-  };
-
-  // Given selected data from another visualization
-  // select the relevant elements here (linking)
-  chart.updateSelection = function (selectedData) {
-    if (!arguments.length) return;
-    // Select an element if its datum was selected
-
-
-    selectableElements.classed("selected", d => {
-      if (d['relation'] == selectedData.toLowerCase()) {
-        return selectedData.includes(d)
-      }
-    });
-
-  };
 
   return chart;
 }

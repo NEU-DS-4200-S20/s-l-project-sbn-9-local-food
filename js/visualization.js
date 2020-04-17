@@ -36,6 +36,7 @@ function deselectAll() {
 	 d3.select("#barchart").selectAll("#no")
 			.style("fill", "green")
 			.style("opacity", 0.5);
+
 }
 
 ((() => {
@@ -98,7 +99,6 @@ function deselectAll() {
 
 		// Call line chart function
 		let lcSeasonProduction = linechart()
-			 .selectionDispatcher(d3.dispatch(dispatchString))
 			 ("#linechart", linechart_data);
 
 		// Call the bar chart function
@@ -107,7 +107,6 @@ function deselectAll() {
 			.xLabel("Does Vendor Have a Trade Relationship")
 			.y(d => d.percent)
 			.yLabel("Desired Percent Increase in Wholesaling")
-			.selectionDispatcher(d3.dispatch(dispatchString))
 			("#barchart", barchart_data);
 
 
@@ -116,27 +115,7 @@ function deselectAll() {
 		})
 		.x(d => d.longitude)
 		.y(d => d.latitude)
-		.selectionDispatcher(d3.dispatch(dispatchString))
 		("#map", map_data);
-
-
-
-		lcSeasonProduction.selectionDispatcher().on(dispatchString, function(selectedData) {
-			bcProductionRelation.updateSelection(selectedData);
-			mpVendorFood.updateSelection(selectedData);
-		});
-
-
-		bcProductionRelation.selectionDispatcher().on(dispatchString, function(selectedData) {
-			lcSeasonProduction.updateSelection(selectedData);
-			mpVendorFood.updateSelection(selectedData);
-		});
-
-
-		mpVendorFood.selectionDispatcher().on(dispatchString, function(selectedData) {
-			lcSeasonProduction.updateSelection(selectedData);
-			bcProductionRelation.updateSelection(selectedData);
-		});
 
 
 	});

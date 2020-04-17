@@ -73,7 +73,7 @@ function barchart() {
 
   let bar = d3.b
 
-      // append the rectangles for the bar chart
+  // append the rectangles for the bar chart
   svg.selectAll(".bar")
     .data(data)
     .enter().append("rect")
@@ -202,28 +202,6 @@ function barchart() {
     yLabelOffsetPx = _;
     return chart;
   };
-
-  // Gets or sets the dispatcher we use for selection events
-  chart.selectionDispatcher = function (_) {
-    if (!arguments.length) return dispatcher;
-    dispatcher = _;
-    return chart;
-  };
-
-  // Given selected data from another visualization
-  // select the relevant elements here (linking)
-  chart.updateSelection = function (selectedData) {
-    if (!arguments.length) return;
-
-    // Select an element if its datum was selected
-    selectableElements.classed("barSelected", d => {
-      if (d['relation'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-        return selectedData.includes(d)
-      }
-    });
-  };
-
-
 
   return chart;
 

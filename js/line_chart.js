@@ -270,27 +270,5 @@ function linechart() {
     return chart;
   };
 
-  // Gets or sets the dispatcher we use for selection events
-  chart.selectionDispatcher = function (_) {
-    if (!arguments.length) return dispatcher;
-    dispatcher = _;
-    return chart;
-  };
-
-  // Given selected data from another visualization
-  // select the relevant elements here (linking)
-  chart.updateSelection = function (selectedData) {
-    if (!arguments.length) return;
-
-
-    selectableElements.classed("barSelected", d => {
-      if (d['id'] == selectedData.charAt(0).toUpperCase() + selectedData.substring(1)) {
-        return selectedData.includes(d)
-      }
-    });
-
-
-  };
-
   return chart;
 }

@@ -143,14 +143,11 @@ opacity: 0.8;
 
 .linechart-holder {
   flex: 0 0.1 40%;
-  /*flex-shrink: .1;*/
 }
 
 
 .barchart-holder {
   flex: 0 0 40%;
-  /*flex-wrap: wrap;*/
-  /*align-self: flex-end;*/
   margin-left: 35px;
 }
 
@@ -161,26 +158,18 @@ opacity: 0.8;
 }
 
 .map-holder{
-	/*flex: 0 0 40%;*/
-	/*display: inline-block;
-	position: relative;*/
 	margin-left: 30px;
 }
 
 .table-holder{
-	/*display: inline-block;*/
-	/*vertical-align: : top;*/
 	float: left;
 	font-size: 100%;
 	margin-left: 25px;
 	visibility: hidden;
 }
 
-td, th {
-	padding: 6px !important;
-}
 
-
+*/
 .axis line{
 stroke: #706f6f;
 stroke-width: 0.5;
@@ -264,7 +253,7 @@ th {
 	background-position: 3% center;
 }
 td, th { 
-	padding: 6px; 
+	padding: 6px !important; 
 	border: 1px solid #ccc; 
 	text-align: left; 
 	width: 50%;
