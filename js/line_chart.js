@@ -1,13 +1,13 @@
 /* global D3 */
 
-// Initialize a line chart
+// Initialize a line chart with correct margins, dimensions, x and y-scales
 function linechart() {
 
   let margin = {
-      top: 60,
-      left: 50,
-      right: 30,
-      bottom: 35
+    top: 60,
+    left: 50,
+    right: 30,
+    bottom: 35
     },
     width = 500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
@@ -32,17 +32,17 @@ function linechart() {
         .attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom + 10].join(' '))
         .classed("svg-content", true);
 
-
     svg = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  svg.append("text") 
-  .attr("x", (width/2)) 
-  .attr("y", (margin.top /4)) 
-  .attr("text-anchor", "middle") 
-  .style("font-size", "16px") 
-  .style("font-weight", "bold") 
-  .text("Average Pallets Produced by Vendors Each Season")
+    // adding a chart title and directly writting styling to it
+    svg.append("text") 
+        .attr("x", (width/2)) 
+        .attr("y", (margin.top /4)) 
+        .attr("text-anchor", "middle") 
+        .style("font-size", "16px") 
+        .style("font-weight", "bold") 
+        .text("Average Pallets Produced by Vendors Each Season")
 
     // Create an area around points to ease selection of data via mouse hover
     const tooltip = d3.select("body").append("div")
@@ -53,22 +53,21 @@ function linechart() {
 
     //Define scales
     xScale
-      .domain(['Spring', 'Summer', 'Fall', 'Winter'])
-      .rangeRound([0, width]);
+        .domain(['Spring', 'Summer', 'Fall', 'Winter'])
+        .rangeRound([0, width]);
 
     yScale.domain([(0), d3.max(data, function(c) {
-    return d3.max(c.values, function(d) {
+        return d3.max(c.values, function(d) {
         return d.pallets + 1; });
         })
     ])
-    .rangeRound([height, 0]);
-
+        .rangeRound([height, 0]);
 
     // X axis
     let xAxis = svg.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(0," + (height) + ")")
-        .call(d3.axisBottom(xScale));
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + (height) + ")")
+      .call(d3.axisBottom(xScale));
 
     // Put X axis tick labels
     xAxis.selectAll("text")
@@ -121,6 +120,7 @@ function linechart() {
     selectableElements = lines;
 
     // Add interactivity via mouse events
+    //Add styling directly to the mouse events, either by color or by opacity
     let line_class = ""
     svg.selectAll("path")
     .on('mouseover', function() {
@@ -141,7 +141,6 @@ function linechart() {
           .style("stroke", "green")
           .style("opacity", 0.5);
 
-
        d3.select("#barchart").selectAll("#yes")
           .style("fill", "blue")
           .style("opacity", 0.5);
@@ -150,61 +149,60 @@ function linechart() {
           .style("fill", "green")
           .style("opacity", 0.5);
 
+        d3.select("#map").selectAll("#" + this.id)
+          .style("fill", "#FF0000")
 
+        d3.select("#barchart").selectAll("#" + this.id)
+          .style("fill", "FF0000");
 
-      d3.select("#map").selectAll("#" + this.id).style("fill", "#FF0000")
-
-      d3.select("#barchart").selectAll("#" + this.id)
-        .style("fill", "FF0000");
-
-      d3.select("#linechart").selectAll("#" + this.id)
+        d3.select("#linechart").selectAll("#" + this.id)
           .style("stroke", "#FF0000");
 
-
+    //mouseout function
     })
     .on('mouseout', function() {
-    const selection = d3.select(this).attr("class", line_class)
+      const selection = d3.select(this)
+        .attr("class", line_class)
     });
 
     // Added (invisible) points so that user can view values on mouseover
     lines.selectAll("points")
-    .data(function(d) {return d.values})
-    .enter()
-    .append("circle")
-    .attr("cx", function(d) { return xScale(d.season); })
-    .attr("cy", function(d) { return yScale(d.pallets); })
-    .attr("r", 8)
-    .attr("class","point")
+      .data(function(d) {return d.values})
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) { return xScale(d.season); })
+      .attr("cy", function(d) { return yScale(d.pallets); })
+      .attr("r", 8)
+      .attr("class","point")
 
+    // Connect points by line
+    // Tooltip on points to allow styling when clicked
     lines.selectAll("circles")
-    .data(function(d) { return(d.values); } )
-    .enter()
-    .append("circle")
-    .attr("cx", function(d) { return xScale(d.season); })
-    .attr("cy", function(d) { return yScale(d.pallets); })
-    .attr('r', 10)
-    .style("opacity", 0)
-    .on('mouseover', function(d) {
+      .data(function(d) { return(d.values); } )
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) { return xScale(d.season); })
+      .attr("cy", function(d) { return yScale(d.pallets); })
+      .attr('r', 10)
+      .style("opacity", 0)
+      .on('mouseover', function(d) {
         tooltip.transition()
-    .duration(200)
-    .delay(30)
-    .style("opacity", 1)
-    .style("color", "steelblue")
-    .style("font-size", "110%")
+          .duration(200)
+          .delay(30)
+          .style("opacity", 1)
+          .style("color", "steelblue")
+          .style("font-size", "110%")
 
         tooltip.html(d.pallets.toFixed(1))
-    .style("left", (d3.event.pageX + 25) + "px")
-    .style("top", (d3.event.pageY) + "px")})
-    .on("mouseout", function(d) {
-    tooltip.transition()
-    .duration(200)
-    .style("opacity", 0);
-    });
+          .style("left", (d3.event.pageX + 25) + "px")
+          .style("top", (d3.event.pageY) + "px")})
+          .on("mouseout", function(d) {
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", 0);
+      });
 
-
-
-
-    return chart;
+  return chart;
   }
 
   // The x-accessor from the datum
@@ -217,6 +215,7 @@ function linechart() {
     return yScale(yValue(d));
   }
 
+  //more chart styling based on the limits of our data
   chart.margin = function (_) {
     if (!arguments.length) return margin;
     margin = _;
