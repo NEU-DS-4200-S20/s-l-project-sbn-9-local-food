@@ -1,5 +1,5 @@
 
-# Group Information
+## Group Information
 
 **Course Name:** DS 4200 S20
 
@@ -13,15 +13,13 @@
 
 Make sure you publish your project to github pages, and put the URL here: https://neu-ds-4200-s20.github.io/s-l-project-sbn-9-local-food/
 
-**Demo Video:** https://youtu.be/4no1FpRXcvI 
+**Demo Video:** https://youtu.be/4no1FpRXcvI
 
 ## Setup
 
 **Under no circumstances should you be editing files via the GitHub user interface.** Do all your edits locally after cloning the repository.
 
 1. Clone this repository to your local machine. E.g., in your terminal / command prompt `CD` to where you want this the folder for this activity to be. Then run `git clone <YOUR_REPO_URL>`
-
-1. In `README.md` update the URL above to point to your GitHub pages website.
 
 1. `CD` or open a terminal / command prompt window into the cloned folder.
 

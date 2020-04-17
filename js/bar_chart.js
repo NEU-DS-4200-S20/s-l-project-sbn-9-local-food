@@ -13,10 +13,14 @@ function barchart() {
     height = 500 - margin.top - margin.bottom,
     xValue = d => d[0],
     yValue = d => d[1],
+    xLabelText = "Does Vendor Have a Trade Relationship",
+    yLabelText = "",
     yLabelOffsetPx = 0,
     xScale = d3.scaleBand(),
     yScale = d3.scaleLinear(),
+    ourBrush = null,
     selectableElements = d3.select(null),
+    dispatcher;
 
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
@@ -93,8 +97,6 @@ function barchart() {
       .attr("height", function(d) { return height - yScale(d.percent); })
 
       .on('mousedown', function() {
-
-      // deselect data
        d3.select("#map").selectAll("#yes")
           .style("fill", "blue")
       d3.select("#map").selectAll("#no")
@@ -115,7 +117,6 @@ function barchart() {
           .style("stroke", "green")
           .style("opacity", 0.5);
 
-       //selecting all the data with the correct id
        d3.select("#map").selectAll("#" + this.id)
           .style("fill", "#FF0000")
       d3.select("#barchart").selectAll("#" + this.id)
@@ -127,7 +128,6 @@ function barchart() {
       });
 
 
-      // Format bar chart scale text
       svg.selectAll("text.bar")
       .data(data)
       .enter().append("text")

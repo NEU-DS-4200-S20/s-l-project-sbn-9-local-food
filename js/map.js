@@ -23,7 +23,6 @@ function map(opts={}) {
   dispatcher;
 
 
-
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
   function chart(selector, data) {
