@@ -1,4 +1,6 @@
+/* global D3 */
 
+// Initialize a bar chart with correct margins, dimensions, x and y-scales
 function barchart() {
 
    let margin = {
@@ -20,7 +22,8 @@ function barchart() {
     selectableElements = d3.select(null),
     dispatcher;
 
-
+  // Create the chart by adding an svg to the div with the id
+  // specified by the selector using the given data
   function chart(selector, data) {
 
     let svg = d3.select(selector)
@@ -29,10 +32,10 @@ function barchart() {
       .attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom + 10].join(' '))
       .classed("svg-content", true);
 
-
     svg = svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    // Adding a chart title and directly writting styling to it
     svg.append("text")
       .attr("x", (width/2))
       .attr("y", (margin.top /4))
@@ -41,6 +44,7 @@ function barchart() {
       .style("font-weight", "bold")
       .text("Effect of Trade Relation on Desired Wholesale")
 
+    // Define scales
      xScale
       .domain(["yes", "no"])
       .rangeRound([0, width])
@@ -49,6 +53,7 @@ function barchart() {
      yScale.domain([0, 100])
         .rangeRound([height, 0]);
 
+    // X axis and label
     let xAxis = svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0, " + (height) + ")")
@@ -73,7 +78,9 @@ function barchart() {
 
   let bar = d3.b
 
-  // append the rectangles for the bar chart
+  // Append the rectangles for the bar chart
+  // Add interactivity via mouse events
+  // Add styling directly to the mouse events, either by color or by opacity
   svg.selectAll(".bar")
     .data(data)
     .enter().append("rect")
@@ -103,15 +110,12 @@ function barchart() {
           .style("fill", "green")
           .style("opacity", 0.5);
 
-
        d3.select("#linechart").selectAll("#yes")
           .style("stroke", "blue")
           .style("opacity", 0.5);
        d3.select("#linechart").selectAll("#no")
           .style("stroke", "green")
           .style("opacity", 0.5);
-
-
 
        d3.select("#map").selectAll("#" + this.id)
           .style("fill", "#FF0000")
@@ -139,12 +143,10 @@ function barchart() {
 
       selectableElements = bars
 
-
-
     return chart;
   }
 
-    // The x-accessor from the datum
+  // The x-accessor from the datum
   function X(d) {
     return xScale(xValue(d));
   }
@@ -154,6 +156,7 @@ function barchart() {
     return yScale(yValue(d));
   }
 
+  // More chart styling based on the limits of our data
   chart.margin = function (_) {
     if (!arguments.length) return margin;
     margin = _;
@@ -203,5 +206,4 @@ function barchart() {
   };
 
   return chart;
-
 }
