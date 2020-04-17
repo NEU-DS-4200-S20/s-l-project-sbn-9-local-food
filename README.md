@@ -1,9 +1,12 @@
 
 # Group Information
 
-Course Name: DS 4200 S20
-Team Members: Sidney La Fontaine, Alex Shaw, Rahul Suryadevara, Eric Downing
-Partner: SBN
+**Course Name:** DS 4200 S20
+
+**Team Members:** Sidney La Fontaine, Alex Shaw, Rahul Suryadevara, Eric Downing
+
+
+**Partner:** SBN
 
 ## The GitHub Pages Website
 
