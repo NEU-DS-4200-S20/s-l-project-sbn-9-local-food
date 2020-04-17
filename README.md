@@ -6,11 +6,14 @@
 **Team Members:** Sidney La Fontaine, Alex Shaw, Rahul Suryadevara, Eric Downing
 
 
+
 **Partner:** SBN
 
 ## The GitHub Pages Website
 
 Make sure you publish your project to github pages, and put the URL here: https://neu-ds-4200-s20.github.io/s-l-project-sbn-9-local-food/
+
+**Demo Video:** https://youtu.be/4no1FpRXcvI 
 
 ## Setup
 
