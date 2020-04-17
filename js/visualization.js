@@ -4,7 +4,6 @@ let data_relation = [];
 let data_norelation = [];
 let relations1 = ["Trade relation", "No trade relation"];
 let relations2 = ["yes", "no"];
-
 let map_data = [];
 let barchart_data = [];
 let bar_relation = [];
@@ -15,6 +14,7 @@ let line_norelation = [];
 let map_relation = [];
 let map_norelation = [];
 
+// Deselection function for button to deselect all highlighting
 function deselectAll() {
 	d3.select("#map").selectAll("#yes")
 			.style("fill", "blue")
@@ -41,10 +41,8 @@ function deselectAll() {
 
 ((() => {
 
+	// load the CSV data file
 	d3.csv("data/data.csv", (data) => {
-
-	    const dispatchString = "selectionUpdated";
-
 
 		// convert strings to numbers unless "Not Applicable"
 		// add 0 to each zipcode
@@ -52,7 +50,6 @@ function deselectAll() {
 			d["Mailing Address (Zip Code)"] = "0" + d["Mailing Address (Zip Code)"] ;
 			d["Latitude"] = +d["Latitude"];
 			d["Longitude"] = +d["Longitude"];
-
 
 			if(d["Spring Capable Volume"] !== "Not Applicable") {
 				d["Spring Capable Volume"] = +d["Spring Capable Volume"];
@@ -72,8 +69,6 @@ function deselectAll() {
 			if(d["Do you have a goal for what percentage of your products you would like to sell wholesale?"] !== "Not Applicable") {
 				d["Do you have a goal for what percentage of your products you would like to sell wholesale?"] = +d["Do you have a goal for what percentage of your products you would like to sell wholesale?"];
 			}
-
-
 		});
 
 		// split data based on whether vendor has trade relation or not
@@ -91,10 +86,8 @@ function deselectAll() {
 		// Format data for bar chart
 		formatBarChartData();
 
-
-		 formatMapData(data);
-
-		// longitude latitude zipcode food trade relation
+		// Format data for map
+	 	formatMapData(data);
 
 
 		// Call line chart function
@@ -109,7 +102,7 @@ function deselectAll() {
 			.yLabel("Desired Percent Increase in Wholesaling")
 			("#barchart", barchart_data);
 
-
+		// Call the map function
 		let mpVendorFood = map({
 			'backgroundImage': 'images/local_map.png'
 		})
@@ -122,11 +115,12 @@ function deselectAll() {
 
 })());
 
+// set map data variable to the parse version of data
 function formatMapData(data) {
 	map_data = parseMapData(data);
 }
 
-
+// Parse the data to be loaded into the map
 function parseMapData(data) {
 
 	let tempArr = [];
@@ -134,16 +128,14 @@ function parseMapData(data) {
 	data.forEach(function(row, i, arr) {
 
 		let mapDict = {};
-
-
 		let longitude = row["Longitude"];
 		let latitude = row["Latitude"];
 		let zipcode = row["Mailing Address (Zip Code)"];
 
-
 		let vendorFood = row["Please list the specialty crop(s) that you produce or are contained in your product(s)."];
 		let relationStatus = row["Does your company currently have a trade relationship with a buyer?"];
 
+		// Replace ? symbols in the data which were used as separators with commas
 		let newStr = "";
 		for (var i = 0; i < vendorFood.length; i++) {
 			if( vendorFood[i] == '?') {
@@ -153,6 +145,7 @@ function parseMapData(data) {
   			newStr = newStr + vendorFood[i];
 		}
 
+		// create each data point with associated attributes
 		mapDict = {
 			latitude: latitude,
 			longitude: longitude,
@@ -163,20 +156,17 @@ function parseMapData(data) {
 
 		tempArr.push(mapDict);
 	});
-
-
-
-
-
 	return tempArr;
-
 }
 
+// Format bar chart data
 function formatBarChartData() {
+	// Load separate data arrays based on trade relation status
 	let bar_relation = parseBarChartData(data_relation);
 	let bar_norelation = parseBarChartData(data_norelation);
 	let barchart_unformatted = [bar_relation, bar_norelation]
 
+	// Create one data array to send to bar chart
 	relations2.forEach(function(r,i) {
 		barchart_data.push({
 			relation: r,

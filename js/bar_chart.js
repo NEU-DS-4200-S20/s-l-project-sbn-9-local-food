@@ -97,6 +97,7 @@ function barchart() {
       .attr("height", function(d) { return height - yScale(d.percent); })
 
       .on('mousedown', function() {
+      // Change colors based on selection
        d3.select("#map").selectAll("#yes")
           .style("fill", "blue")
       d3.select("#map").selectAll("#no")
@@ -128,6 +129,7 @@ function barchart() {
       });
 
 
+      // Format bar chart scale text
       svg.selectAll("text.bar")
       .data(data)
       .enter().append("text")
