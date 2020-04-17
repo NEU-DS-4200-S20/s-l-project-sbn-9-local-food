@@ -130,7 +130,6 @@ function barchart() {
       .attr("class", "bar")
       .attr("text-anchor", "middle")
       .attr("x", function(d) {
-        console.log(d.relation)
         return xScale(d.relation) + (width/4);
          })
       .attr("y", function(d) { return yScale(d.percent) - 5; })

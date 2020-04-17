@@ -11,7 +11,7 @@ function map(opts={}) {
       bottom: 0
     },
     width = 433,
-    height = 537, 
+    height = 537,
     xValue = d => d[0],
     yValue = d => d[1],
     xLabelText = "",
@@ -274,7 +274,6 @@ function map(opts={}) {
   };
 
   chart.y = function (_) {
-       // console.log(yValue)
 
     if (!arguments.length) return yValue;
     yValue = _;

@@ -37,11 +37,11 @@ function linechart() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   svg.append("text") 
-  .attr("x", (width/2))       
+  .attr("x", (width/2)) 
   .attr("y", (margin.top /4)) 
-  .attr("text-anchor", "middle")   
-  .style("font-size", "16px")  
-  .style("font-weight", "bold")   
+  .attr("text-anchor", "middle") 
+  .style("font-size", "16px") 
+  .style("font-weight", "bold") 
   .text("Average Pallets Produced by Vendors Each Season")
 
     // Create an area around points to ease selection of data via mouse hover
@@ -113,7 +113,6 @@ function linechart() {
       lines.append("path")
       .attr("class", ids)
       .attr("d", function(d) {
-        //console.log(d);
         return line(d.values)})
       .attr("id", function(d) {
         return d.id;
@@ -162,10 +161,6 @@ function linechart() {
           .style("stroke", "#FF0000");
 
 
-    }).
-    on('mouseup', function() {
-      let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-     // dispatcher.call(dispatchString, this, svg.selectAll(".lineSelected").data()[0]['id']);
     })
     .on('mouseout', function() {
     const selection = d3.select(this).attr("class", line_class)
