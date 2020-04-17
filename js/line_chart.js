@@ -18,9 +18,7 @@ function linechart() {
     yLabelOffsetPx = 0,
     xScale = d3.scalePoint(),
     yScale = d3.scaleLinear(),
-    ourBrush = null,
     selectableElements = d3.select(null),
-    dispatcher;
 
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
@@ -129,6 +127,7 @@ function linechart() {
     }).
     on('mousedown', function() {
 
+      // deselect data
       d3.select("#map").selectAll("#yes")
           .style("fill", "blue")
       d3.select("#map").selectAll("#no")
@@ -149,6 +148,8 @@ function linechart() {
           .style("fill", "green")
           .style("opacity", 0.5);
 
+
+        //selecting all the data with the correct id
         d3.select("#map").selectAll("#" + this.id)
           .style("fill", "#FF0000")
 

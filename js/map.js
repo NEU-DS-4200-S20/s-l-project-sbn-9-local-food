@@ -1,9 +1,8 @@
 /* global D3 */
 
-
+// Initialize a map with correct margins, dimensions, x and y-scales
 function map(opts={}) {
 
-  //creating basical variables
   let margin = {
     top: 0,
     left: 0,
@@ -33,7 +32,6 @@ function map(opts={}) {
     maxX = d3.max(data, d => d.latitude),
     minY = d3.min(data, d => d.longitude),
     maxY = d3.max(data, d => d.longitude)
-
 
 
     //adding the basic svg
@@ -72,13 +70,15 @@ function map(opts={}) {
 
 
 
-    // Add the points
+    // Add the points to the map
     let points = svg.append("g")
     .selectAll(".scatterPoint")
     .data(data);
 
     points.exit().remove();
 
+    // Assign data to each point and id based on 
+    // trade relation status
     points = points.enter()
     .append("circle")
     .attr("class", "")
@@ -165,13 +165,11 @@ function map(opts={}) {
             d3.select("#linechart").selectAll("#" + id).style("stroke", "#FF0000");
             d3.select("#barchart").selectAll("#" + id).style("fill", "#FF0000");
 
-
           }
+          // defines the dimensions within which a selected points should fall in
           return x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
         }
-
       )
-
     }
     //when the user finishes highlighting the table appears
     function brushEnd(){
@@ -179,7 +177,6 @@ function map(opts={}) {
       if (!d3.event.selection) return;
 
       // programmed clearing of brush after mouse-up
-      // ref: https://github.com/d3/d3-brush/issues/10
       d3.select(this).call(brush.move, null);
 
       var d_brushed =  d3.selectAll(".selected").data();
@@ -201,7 +198,6 @@ function map(opts={}) {
 
     //removes all the data currently in the table
     function clearTableRows() {
-
       hideTableColNames();
       d3.selectAll(".row_data").remove();
     }
@@ -233,10 +229,7 @@ function map(opts={}) {
         .attr("align", (d, i) => i == 0 ? "left" : "right")
         .text(d => d);
       }
-
-
     }
-
     return chart;
   }
 
@@ -298,7 +291,6 @@ function map(opts={}) {
     yLabelOffsetPx = _;
     return chart;
   };
-
 
   return chart;
 }
