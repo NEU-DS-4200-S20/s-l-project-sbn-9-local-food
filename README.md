@@ -5,9 +5,11 @@
 
 **Team Members:** Sidney La Fontaine, Alex Shaw, Rahul Suryadevara, Eric Downing
 
-
-
 **Partner:** SBN
+
+
+##Technology
+D3.js, CSS, HTML
 
 ## The GitHub Pages Website
 
